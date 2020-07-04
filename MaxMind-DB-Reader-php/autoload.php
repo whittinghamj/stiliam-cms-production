@@ -1,45 +1,32 @@
-<?php
-
-/**
- * PSR-4 autoloader implementation for the MaxMind\DB namespace.
- * First we define the 'mmdb_autoload' function, and then we register
- * it with 'spl_autoload_register' so that PHP knows to use it.
- *
- * @param mixed $class
- */
-
-/**
- * Automatically include the file that defines <code>class</code>.
- *
- * @param string $class
- *                      the name of the class to load
- */
-function mmdb_autoload($class)
-{
-    /*
-    * A project-specific mapping between the namespaces and where
-    * they're located. By convention, we include the trailing
-    * slashes. The one-element array here simply makes things easy
-    * to extend in the future if (for example) the test classes
-    * begin to use one another.
-    */
-    $namespace_map = ['MaxMind\\Db\\' => __DIR__ . '/src/MaxMind/Db/'];
-
-    foreach ($namespace_map as $prefix => $dir) {
-        /* First swap out the namespace prefix with a directory... */
-        $path = str_replace($prefix, $dir, $class);
-
-        /* replace the namespace separator with a directory separator... */
-        $path = str_replace('\\', '/', $path);
-
-        /* and finally, add the PHP file extension to the result. */
-        $path = $path . '.php';
-
-        /* $path should now contain the path to a PHP file defining $class */
-        if (file_exists($path)) {
-            include $path;
-        }
-    }
-}
-
-spl_autoload_register('mmdb_autoload');
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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

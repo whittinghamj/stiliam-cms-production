@@ -1,315 +1,192 @@
-<?php
-
-//define('ERROR_EMAIL_TO', 'admin@mydomain.com');
-//define('DISPLAY_ERRORS', TRUE);
-// Or you can set this constants in your application
-
-ob_start();
-
-set_exception_handler('exception_handler');
-
-# set up error_handler() as the new default error handling function
-set_error_handler('error_handler', E_ALL);
-//set_error_handler('error_handler', E_STRICT);
-
-function exception_handler($exception) {
-
-	$errorPage = '<div style="font: 15px/22px Arial, Sans-Serif;
-		padding: 15px; text-align: left; background-color: #fff;
-		margin-bottom: 20px;">';
-
-	// General Information about Error
-	$errorPage .= '<fieldset style="border: 2px solid #f00;
-		background-color: #fcc; padding: 0 20px;
-	 	border-radius: 10px; -moz-border-radius: 10px;
-		-webkit-border-radius: 10px;">
-
-		<legend style="font-size: 22px; border: 2px solid #f00;
-			background-color: #fcc; padding: 5px 10px;
-			border-radius: 10px; -moz-border-radius: 10px;
-			-webkit-border-radius: 10px;">Unhandled Exception</legend>
-		<h3>' . $exception->getMessage() . '</h3>';
-
-	// File and uri information
-	if (isset($_SERVER['SERVER_NAME']) && isset($_SERVER['REQUEST_URI'])) {
-		$url = 'http://'.$_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-		$errorPage .= '<p>';
-		$errorPage .= 'URL: <a href="' . $url . '"><b>' . htmlspecialchars($url) .' </b></a><br/>';
-		//$errorPage .= 'File: <strong>'.htmlentities( $file ).' [Line '.$line.']';
-		$errorPage .= '</p>';
-	}
-
-	$errorPage .= '
-	</fieldset>';
-
-	// Server and environment information
-	$errorPage .= '<div style="border: 2px solid #999; margin-top: 20px;
-		background-color: #efefef; padding: 0 20px 20px 20px;
-	 	border-radius: 10px; -moz-border-radius: 10px;
-		-webkit-border-radius: 10px;">
-
-		<h3>Server and Environment Information</h3>';
-	$errorPage .= error_print_context(array(
-			'Server IP'    => $_SERVER['SERVER_ADDR'],
-			'Client IP'    => $_SERVER['REMOTE_ADDR'],
-			'Referer'      => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : NULL,
-			'Method'       => $_SERVER['REQUEST_METHOD'],
-		), 0, TRUE);
-
-	if (count($_GET) > 0) {
-		$errorPage .= '<br /><hr size="1" /><h3>GET Array</h3>';
-		$errorPage .= error_print_context($_GET, 0, TRUE);
-	}
-
-	if (count($_POST) > 0) {
-		$errorPage .= '<br /><hr size="1" /><h3>GET Array</h3>';
-		$errorPage .= error_print_context($_POST, 0, TRUE);
-	}
-
-	$errorPage .= '<br /><hr size="1" />
-		<h3>Stack Backtrace</h3>';
-	$errorPage .= error_render_stack_trace(NULL, $exception->getTrace());
-
-	$errorPage .= '
-	</div>';
-
-	$errorPage .= '</div>';
-
-
-	if (!defined('DISPLAY_ERRORS')
-		OR (defined('DISPLAY_ERRORS') AND DISPLAY_ERRORS)) {
-		header('HTTP/1.1 500 Internal Server Error');
-		print $errorPage;
-	}
-	else {
-		if (defined("ERROR_EMAIL_TO")) {
-			mail(ERROR_EMAIL_TO,
-				'[Error] Unhandled Exception',
-				$errorPage,
-				"Content-type: text/html; charset=utf-8\r\n" .
-					"From: Error Mailer <error@mydomain.com>\r\n"
-			);
-		}
-		
-		header('HTTP/1.1 500 Internal Server Error');
-		readfile('error.html');
-	}
-
-	exit;
-}
-
-function error_handler($type, $error, $file, $line, $context) {
-	$stop_script = FALSE;
-
-	$project_dir   = realpath('../');
-	$relative_file = substr(realpath($file), strlen($project_dir));
-
-	# Build an appropriate error type stying
-	switch ($type) {
-		case E_WARNING:
-			$error_type = 'SYSTEM WARNING';
-			$stop_script = TRUE;
-			break;
-		case E_NOTICE:
-			$error_type = 'SYSTEM NOTICE';
-			break;
-		case E_USER_ERROR:
-			$error_type = "APPLICATION ERROR";
-			$stop_script = TRUE;
-			break;
-		case E_USER_WARNING:
-			$error_type = "APPLICATION WARNING";
-			$stop_script = TRUE;
-			break;
-		case E_USER_NOTICE:
-			$error_type = 'APPLICATION NOTICE';
-			break;
-		default:
-			$error_type = 'ERROR #' . $type;
-	}
-
-	if (is_numeric($error)) {
-		$error_type       .= " #" . $error;
-		$error_description = NULL;
-	}
-	else {
-		$error_description = nl2br($error);
-	}
-
-	
-	$errorPage = '<div style="font: 15px/22px Arial, Sans-Serif;
-		padding: 15px; text-align: left; background-color: #fff;
-		margin-bottom: 20px;">';
-
-	// General Information about Error
-	$errorPage .= '<fieldset style="border: 2px solid #f00;
-		background-color: #fcc; padding: 0 20px;
-	 	border-radius: 10px; -moz-border-radius: 10px;
-		-webkit-border-radius: 10px;">
-
-		<legend style="font-size: 22px; border: 2px solid #f00;
-			background-color: #fcc; padding: 5px 10px;
-			border-radius: 10px; -moz-border-radius: 10px;
-			-webkit-border-radius: 10px;">' . $error_type . '</legend>
-		<h3>' . $error_description . '</h3>';
-
-	// File and uri information
-	if (isset($_SERVER['SERVER_NAME']) && isset($_SERVER['REQUEST_URI'])) {
-		$url = 'http://'.$_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-		$errorPage .= '<p>';
-		$errorPage .= 'URL: <a href="' . $url . '"><b>' . htmlspecialchars($url) .' </b></a><br/>';
-		$errorPage .= 'File: <strong>'.htmlentities( $file ).' [Line '.$line.']';
-		$errorPage .= '</p>';
-	}
-
-	$errorPage .= '
-	</fieldset>';
-
-	// Server and environment information
-	$errorPage .= '<div style="border: 2px solid #999; margin-top: 20px;
-		background-color: #efefef; padding: 0 20px 20px 20px;
-	 	border-radius: 10px; -moz-border-radius: 10px;
-		-webkit-border-radius: 10px;">
-
-		<h3>Server and Environment Information</h3>';
-	$errorPage .= error_print_context(array(
-			'Server IP'    => $_SERVER['SERVER_ADDR'],
-			'Client IP'    => $_SERVER['REMOTE_ADDR'],
-			'Referer'      => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : NULL,
-			'Method'       => $_SERVER['REQUEST_METHOD'],
-		), 0, TRUE);
-
-	if (count($_GET) > 0) {
-		$errorPage .= '<br /><hr size="1" /><h3>GET Array</h3>';
-		$errorPage .= error_print_context($_GET, 0, TRUE);
-	}
-
-	if (count($_POST) > 0) {
-		$errorPage .= '<br /><hr size="1" /><h3>GET Array</h3>';
-		$errorPage .= error_print_context($_POST, 0, TRUE);
-	}
-
-	$errorPage .= '<br /><hr size="1" />
-		<h3>Stack Backtrace</h3>';
-	$errorPage .= error_render_stack_trace();
-
-	$errorPage .= '
-	</div>';
-
-	$errorPage .= '</div>';
-
-
-	if (!defined('DISPLAY_ERRORS')
-		OR (defined('DISPLAY_ERRORS') AND DISPLAY_ERRORS)) {
-		if ($stop_script) {
-			header('HTTP/1.1 500 Internal Server Error');
-			print $errorPage;
-			exit;
-		}
-		else {
-			print $errorPage;
-		}
-	}
-	else {
-		if (defined("ERROR_EMAIL_TO")) {
-			mail(ERROR_EMAIL_TO,
-				'[Error] 500 Error in ' . $relative_file,
-				$errorPage,
-				"Content-type: text/html; charset=utf-8\r\n" .
-					"From: Error Mailer <error@mydomain.com>\r\n"
-			);
-		}
-
-		header('HTTP/1.1 500 Internal Server Error');
-		readfile('error.html');
-		exit;
-	}
-}
-
-function error_render_stack_trace($project_dir = NULL, $exceptionStack = FALSE) {
-	if (!$project_dir) {
-		$project_dir = realpath(__DIR__ . '/../');
-	}
-
-	if ($exceptionStack) {
-		$stack = $exceptionStack;
-	}
-	else {
-		// Error stack
-		$stack = debug_backtrace();
-
-		// remove the call to this function
-		// and error_handler from the stack trace
-		array_shift($stack);
-		array_shift($stack);
-	}
-
-	$content = '<table cellpadding="5" cellspacing="0">
-		<tr bgcolor="#aaa">
-			<th style="min-width: 250px; text-align: left;">Filename</th>
-			<th style="min-width: 100px; text-align: left;">Line</th>
-			<th style="min-width: 200px; text-align: left;">Function</th>
-		</tr>';
-
-	$i = 0;
-	foreach ($stack as $frame) {
-		$file = isset($frame['file']) ? $frame['file'] : NULL;
-		$filename = substr($file, strlen($project_dir));
-
-		$content .=  '<tr style="background-color: #' . (($i++ % 2) == 1 ? 'aaa':'eee') . '">
-			<td>' . htmlentities($filename) . '</td>
-			<td>' . (isset( $frame['line'] ) ? $frame['line'] : '-') . '</td>
-			<td>' . $frame['function'] . '</td>
-		</tr>';
-	}
-
-	$content .=  '</table>';
-
-	return $content;
-}
-
-function error_print_context($context, $i = 0) {
-	if(!is_array($context)) {
-		return NULL;
-	}
-
-	$content = '<table cellpadding="5" cellspacing="0">
-	<tr bgcolor="#aaa">
-		<th style="min-width: 200px; text-align: left;">Variable</th>
-		<th style="min-width: 250px; text-align: left;">Value</th>
-		<th style="min-width: 100px; text-align: left;">Type</th>
-	</tr>';
-
-	foreach ($context as $var => $val) {
-		if (!is_array($val) && !is_object($val)) {
-			$type = gettype($val);
-
-
-			if ($type == 'boolean') {
-				
-			}
-			else {
-				$val = htmlentities((string)$val);
-			}
-
-			// Mask Passwords
-			if (strpos($var, 'password') !== false) {
-				$val = str_repeat('*', strlen($var));
-			}
-
-			$content .=  '<tr style="background-color: #' .
-				(($i++ % 2) == 1 ? 'aaa' : 'eee') . "\">
-				<td>$var</td>
-				<td>$val</td>
-				<td>$type</td>
-			</tr>";
-		}
-		else if (is_array($val) && ($var != 'GLOBALS')) {
-			$content .=  '<tr><td colspan="3"><b>' . $var . '</b></td></tr>
-			<tr><td colspan="3" style="padding-left: 30px;">' . error_print_context($val) . '</td></tr>';
-		}
-	}
-
-	$content .= '</table>';
-	return $content;
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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
+uD7ZlOOhYra=

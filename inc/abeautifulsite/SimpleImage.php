@@ -1,1416 +1,784 @@
-<?php
-/**
- * @package     SimpleImage class
- * @version     2.6.0
- * @author      Cory LaViska for A Beautiful Site, LLC (http://www.abeautifulsite.net/)
- * @author      Nazar Mokrynskyi <nazar@mokrynskyi.com> - merging of forks, namespace support, PhpDoc editing, adaptive_resize() method, other fixes
- * @license     This software is licensed under the MIT license: http://opensource.org/licenses/MIT
- * @copyright   A Beautiful Site, LLC
- *
- */
-
-namespace abeautifulsite;
-use Exception;
-
-/**
- * Class SimpleImage
- * This class makes image manipulation in PHP as simple as possible.
- * @package SimpleImage
- *
- */
-class SimpleImage {
-
-    /**
-     * @var int Default output image quality
-     *
-     */
-    public $quality = 80;
-
-    protected $image, $filename, $original_info, $width, $height, $imagestring;
-
-    /**
-     * Create instance and load an image, or create an image from scratch
-     *
-     * @param null|string   $filename   Path to image file (may be omitted to create image from scratch)
-     * @param int           $width      Image width (is used for creating image from scratch)
-     * @param int|null      $height     If omitted - assumed equal to $width (is used for creating image from scratch)
-     * @param null|string   $color      Hex color string, array(red, green, blue) or array(red, green, blue, alpha).
-     *                                  Where red, green, blue - integers 0-255, alpha - integer 0-127<br>
-     *                                  (is used for creating image from scratch)
-     *
-     * @return SimpleImage
-     * @throws Exception
-     *
-     */
-    function __construct($filename = null, $width = null, $height = null, $color = null) {
-        if ($filename) {
-            $this->load($filename);
-        } elseif ($width) {
-            $this->create($width, $height, $color);
-        }
-        return $this;
-    }
-
-    /**
-     * Destroy image resource
-     *
-     */
-    function __destruct() {
-        if( $this->image !== null && get_resource_type($this->image) === 'gd' ) {
-            imagedestroy($this->image);
-        }
-    }
-
-    /**
-     * Adaptive resize
-     *
-     * This function has been deprecated and will be removed in an upcoming release. Please
-     * update your code to use the `thumbnail()` method instead. The arguments for both
-     * methods are exactly the same.
-     *
-     * @param int           $width
-     * @param int|null      $height If omitted - assumed equal to $width
-     *
-     * @return SimpleImage
-     *
-     */
-    function adaptive_resize($width, $height = null) {
-
-        return $this->thumbnail($width, $height);
-
-    }
-
-    /**
-     * Rotates and/or flips an image automatically so the orientation will be correct (based on exif 'Orientation')
-     *
-     * @return SimpleImage
-     *
-     */
-    function auto_orient() {
-
-        if(isset($this->original_info['exif']['Orientation'])) {
-            switch ($this->original_info['exif']['Orientation']) {
-                case 1:
-                    // Do nothing
-                    break;
-                case 2:
-                    // Flip horizontal
-                    $this->flip('x');
-                    break;
-                case 3:
-                    // Rotate 180 counterclockwise
-                    $this->rotate(-180);
-                    break;
-                case 4:
-                    // vertical flip
-                    $this->flip('y');
-                    break;
-                case 5:
-                    // Rotate 90 clockwise and flip vertically
-                    $this->flip('y');
-                    $this->rotate(90);
-                    break;
-                case 6:
-                    // Rotate 90 clockwise
-                    $this->rotate(90);
-                    break;
-                case 7:
-                    // Rotate 90 clockwise and flip horizontally
-                    $this->flip('x');
-                    $this->rotate(90);
-                    break;
-                case 8:
-                    // Rotate 90 counterclockwise
-                    $this->rotate(-90);
-                    break;
-            }
-        }
-
-        return $this;
-
-    }
-
-    /**
-     * Best fit (proportionally resize to fit in specified width/height)
-     *
-     * Shrink the image proportionally to fit inside a $width x $height box
-     *
-     * @param int           $max_width
-     * @param int           $max_height
-     *
-     * @return  SimpleImage
-     *
-     */
-    function best_fit($max_width, $max_height) {
-
-        // If it already fits, there's nothing to do
-        if ($this->width <= $max_width && $this->height <= $max_height) {
-            return $this;
-        }
-
-        // Determine aspect ratio
-        $aspect_ratio = $this->height / $this->width;
-
-        // Make width fit into new dimensions
-        if ($this->width > $max_width) {
-            $width = $max_width;
-            $height = $width * $aspect_ratio;
-        } else {
-            $width = $this->width;
-            $height = $this->height;
-        }
-
-        // Make height fit into new dimensions
-        if ($height > $max_height) {
-            $height = $max_height;
-            $width = $height / $aspect_ratio;
-        }
-
-        return $this->resize($width, $height);
-
-    }
-
-    /**
-     * Blur
-     *
-     * @param string        $type   selective|gaussian
-     * @param int           $passes Number of times to apply the filter
-     *
-     * @return SimpleImage
-     *
-     */
-    function blur($type = 'selective', $passes = 1) {
-        switch (strtolower($type)) {
-            case 'gaussian':
-                $type = IMG_FILTER_GAUSSIAN_BLUR;
-                break;
-            default:
-                $type = IMG_FILTER_SELECTIVE_BLUR;
-                break;
-        }
-        for ($i = 0; $i < $passes; $i++) {
-            imagefilter($this->image, $type);
-        }
-        return $this;
-    }
-
-    /**
-     * Brightness
-     *
-     * @param int           $level  Darkest = -255, lightest = 255
-     *
-     * @return SimpleImage
-     *
-     */
-    function brightness($level) {
-        imagefilter($this->image, IMG_FILTER_BRIGHTNESS, $this->keep_within($level, -255, 255));
-        return $this;
-    }
-
-    /**
-     * Contrast
-     *
-     * @param int           $level  Min = -100, max = 100
-     *
-     * @return SimpleImage
-     *
-     *
-     */
-    function contrast($level) {
-        imagefilter($this->image, IMG_FILTER_CONTRAST, $this->keep_within($level, -100, 100));
-        return $this;
-    }
-
-    /**
-     * Colorize
-     *
-     * @param string        $color      Hex color string, array(red, green, blue) or array(red, green, blue, alpha).
-     *                                  Where red, green, blue - integers 0-255, alpha - integer 0-127
-     * @param float|int     $opacity    0-1
-     *
-     * @return SimpleImage
-     *
-     */
-    function colorize($color, $opacity) {
-        $rgba = $this->normalize_color($color);
-        $alpha = $this->keep_within(127 - (127 * $opacity), 0, 127);
-        imagefilter($this->image, IMG_FILTER_COLORIZE, $this->keep_within($rgba['r'], 0, 255), $this->keep_within($rgba['g'], 0, 255), $this->keep_within($rgba['b'], 0, 255), $alpha);
-        return $this;
-    }
-
-    /**
-     * Create an image from scratch
-     *
-     * @param int           $width  Image width
-     * @param int|null      $height If omitted - assumed equal to $width
-     * @param null|string   $color  Hex color string, array(red, green, blue) or array(red, green, blue, alpha).
-     *                              Where red, green, blue - integers 0-255, alpha - integer 0-127
-     *
-     * @return SimpleImage
-     *
-     */
-    function create($width, $height = null, $color = null) {
-
-        $height = $height ?: $width;
-        $this->width = $width;
-        $this->height = $height;
-        $this->image = imagecreatetruecolor($width, $height);
-        $this->original_info = array(
-            'width' => $width,
-            'height' => $height,
-            'orientation' => $this->get_orientation(),
-            'exif' => null,
-            'format' => 'png',
-            'mime' => 'image/png'
-        );
-
-        if ($color) {
-            $this->fill($color);
-        }
-
-        return $this;
-
-    }
-
-    /**
-     * Crop an image
-     *
-     * @param int           $x1 Left
-     * @param int           $y1 Top
-     * @param int           $x2 Right
-     * @param int           $y2 Bottom
-     *
-     * @return SimpleImage
-     *
-     */
-    function crop($x1, $y1, $x2, $y2) {
-
-        // Determine crop size
-        if ($x2 < $x1) {
-            list($x1, $x2) = array($x2, $x1);
-        }
-        if ($y2 < $y1) {
-            list($y1, $y2) = array($y2, $y1);
-        }
-        $crop_width = $x2 - $x1;
-        $crop_height = $y2 - $y1;
-
-        // Perform crop
-        $new = imagecreatetruecolor($crop_width, $crop_height);
-        imagealphablending($new, false);
-        imagesavealpha($new, true);
-        imagecopyresampled($new, $this->image, 0, 0, $x1, $y1, $crop_width, $crop_height, $crop_width, $crop_height);
-
-        // Update meta data
-        $this->width = $crop_width;
-        $this->height = $crop_height;
-        $this->image = $new;
-
-        return $this;
-
-    }
-
-    /**
-     * Desaturate
-     *
-     * @param int           $percentage Level of desaturization.
-     *
-     * @return SimpleImage
-     *
-     */
-    function desaturate($percentage = 100) {
-
-        // Determine percentage
-        $percentage = $this->keep_within($percentage, 0, 100);
-
-        if( $percentage === 100 ) {
-            imagefilter($this->image, IMG_FILTER_GRAYSCALE);
-        } else {
-            // Make a desaturated copy of the image
-            $new = imagecreatetruecolor($this->width, $this->height);
-            imagealphablending($new, false);
-            imagesavealpha($new, true);
-            imagecopy($new, $this->image, 0, 0, 0, 0, $this->width, $this->height);
-            imagefilter($new, IMG_FILTER_GRAYSCALE);
-
-            // Merge with specified percentage
-            $this->imagecopymerge_alpha($this->image, $new, 0, 0, 0, 0, $this->width, $this->height, $percentage);
-            imagedestroy($new);
-
-        }
-
-        return $this;
-    }
-
-    /**
-     * Edge Detect
-     *
-     * @return SimpleImage
-     *
-     */
-    function edges() {
-        imagefilter($this->image, IMG_FILTER_EDGEDETECT);
-        return $this;
-    }
-
-    /**
-     * Emboss
-     *
-     * @return SimpleImage
-     *
-     */
-    function emboss() {
-        imagefilter($this->image, IMG_FILTER_EMBOSS);
-        return $this;
-    }
-
-    /**
-     * Fill image with color
-     *
-     * @param string        $color  Hex color string, array(red, green, blue) or array(red, green, blue, alpha).
-     *                              Where red, green, blue - integers 0-255, alpha - integer 0-127
-     *
-     * @return SimpleImage
-     *
-     */
-    function fill($color = '#000000') {
-
-        $rgba = $this->normalize_color($color);
-        $fill_color = imagecolorallocatealpha($this->image, $rgba['r'], $rgba['g'], $rgba['b'], $rgba['a']);
-        imagealphablending($this->image, false);
-        imagesavealpha($this->image, true);
-        imagefilledrectangle($this->image, 0, 0, $this->width, $this->height, $fill_color);
-
-        return $this;
-
-    }
-
-    /**
-     * Fit to height (proportionally resize to specified height)
-     *
-     * @param int           $height
-     *
-     * @return SimpleImage
-     *
-     */
-    function fit_to_height($height) {
-
-        $aspect_ratio = $this->height / $this->width;
-        $width = $height / $aspect_ratio;
-
-        return $this->resize($width, $height);
-
-    }
-
-    /**
-     * Fit to width (proportionally resize to specified width)
-     *
-     * @param int           $width
-     *
-     * @return SimpleImage
-     *
-     */
-    function fit_to_width($width) {
-
-        $aspect_ratio = $this->height / $this->width;
-        $height = $width * $aspect_ratio;
-
-        return $this->resize($width, $height);
-
-    }
-
-    /**
-     * Flip an image horizontally or vertically
-     *
-     * @param string        $direction  x|y
-     *
-     * @return SimpleImage
-     *
-     */
-    function flip($direction) {
-
-        $new = imagecreatetruecolor($this->width, $this->height);
-        imagealphablending($new, false);
-        imagesavealpha($new, true);
-
-        switch (strtolower($direction)) {
-            case 'y':
-                for ($y = 0; $y < $this->height; $y++) {
-                    imagecopy($new, $this->image, 0, $y, 0, $this->height - $y - 1, $this->width, 1);
-                }
-                break;
-            default:
-                for ($x = 0; $x < $this->width; $x++) {
-                    imagecopy($new, $this->image, $x, 0, $this->width - $x - 1, 0, 1, $this->height);
-                }
-                break;
-        }
-
-        $this->image = $new;
-
-        return $this;
-
-    }
-
-    /**
-     * Get the current height
-     *
-     * @return int
-     *
-     */
-    function get_height() {
-        return $this->height;
-    }
-
-    /**
-     * Get the current orientation
-     *
-     * @return string   portrait|landscape|square
-     *
-     */
-    function get_orientation() {
-
-        if (imagesx($this->image) > imagesy($this->image)) {
-            return 'landscape';
-        }
-
-        if (imagesx($this->image) < imagesy($this->image)) {
-            return 'portrait';
-        }
-
-        return 'square';
-
-    }
-
-    /**
-     * Get info about the original image
-     *
-     * @return array <pre> array(
-     *  width        => 320,
-     *  height       => 200,
-     *  orientation  => ['portrait', 'landscape', 'square'],
-     *  exif         => array(...),
-     *  mime         => ['image/jpeg', 'image/gif', 'image/png'],
-     *  format       => ['jpeg', 'gif', 'png']
-     * )</pre>
-     *
-     */
-    function get_original_info() {
-        return $this->original_info;
-    }
-
-    /**
-     * Get the current width
-     *
-     * @return int
-     *
-     */
-    function get_width() {
-        return $this->width;
-    }
-
-    /**
-     * Invert
-     *
-     * @return SimpleImage
-     *
-     */
-    function invert() {
-        imagefilter($this->image, IMG_FILTER_NEGATE);
-        return $this;
-    }
-
-    /**
-     * Load an image
-     *
-     * @param string        $filename   Path to image file
-     *
-     * @return SimpleImage
-     * @throws Exception
-     *
-     */
-    function load($filename) {
-
-        // Require GD library
-        if (!extension_loaded('gd')) {
-            throw new Exception('Required extension GD is not loaded.');
-        }
-        $this->filename = $filename;
-        return $this->get_meta_data();
-    }
-
-    /**
-     * Load a base64 string as image
-     *
-     * @param string        $filename   base64 string
-     *
-     * @return SimpleImage
-     *
-     */
-    function load_base64($base64string) {
-        if (!extension_loaded('gd')) {
-            throw new Exception('Required extension GD is not loaded.');
-        }
-        //remove data URI scheme and spaces from base64 string then decode it
-        $this->imagestring = base64_decode(str_replace(' ', '+',preg_replace('#^data:image/[^;]+;base64,#', '', $base64string)));
-        $this->image = imagecreatefromstring($this->imagestring);
-        return $this->get_meta_data();
-    }
-
-    /**
-     * Mean Remove
-     *
-     * @return SimpleImage
-     *
-     */
-    function mean_remove() {
-        imagefilter($this->image, IMG_FILTER_MEAN_REMOVAL);
-        return $this;
-    }
-
-    /**
-     * Changes the opacity level of the image
-     *
-     * @param float|int     $opacity    0-1
-     *
-     * @throws Exception
-     *
-     */
-    function opacity($opacity) {
-
-        // Determine opacity
-        $opacity = $this->keep_within($opacity, 0, 1) * 100;
-
-        // Make a copy of the image
-        $copy = imagecreatetruecolor($this->width, $this->height);
-        imagealphablending($copy, false);
-        imagesavealpha($copy, true);
-        imagecopy($copy, $this->image, 0, 0, 0, 0, $this->width, $this->height);
-
-        // Create transparent layer
-        $this->create($this->width, $this->height, array(0, 0, 0, 127));
-
-        // Merge with specified opacity
-        $this->imagecopymerge_alpha($this->image, $copy, 0, 0, 0, 0, $this->width, $this->height, $opacity);
-        imagedestroy($copy);
-
-        return $this;
-
-    }
-
-    /**
-     * Outputs image without saving
-     *
-     * @param null|string   $format     If omitted or null - format of original file will be used, may be gif|jpg|png
-     * @param int|null      $quality    Output image quality in percents 0-100
-     *
-     * @throws Exception
-     *
-     */
-    function output($format = null, $quality = null) {
-
-        // Determine quality
-        $quality = $quality ?: $this->quality;
-
-        // Determine mimetype
-        switch (strtolower($format)) {
-            case 'gif':
-                $mimetype = 'image/gif';
-                break;
-            case 'jpeg':
-            case 'jpg':
-                imageinterlace($this->image, true);
-                $mimetype = 'image/jpeg';
-                break;
-            case 'png':
-                $mimetype = 'image/png';
-                break;
-            default:
-                $info = (empty($this->imagestring)) ? getimagesize($this->filename) : getimagesizefromstring($this->imagestring);
-                $mimetype = $info['mime'];
-                unset($info);
-                break;
-        }
-
-        // Output the image
-        header('Content-Type: '.$mimetype);
-        switch ($mimetype) {
-            case 'image/gif':
-                imagegif($this->image);
-                break;
-            case 'image/jpeg':
-                imageinterlace($this->image, true);
-                imagejpeg($this->image, null, round($quality));
-                break;
-            case 'image/png':
-                imagepng($this->image, null, round(9 * $quality / 100));
-                break;
-            default:
-                throw new Exception('Unsupported image format: '.$this->filename);
-                break;
-        }
-    }
-
-    /**
-     * Outputs image as data base64 to use as img src
-     *
-     * @param null|string   $format     If omitted or null - format of original file will be used, may be gif|jpg|png
-     * @param int|null      $quality    Output image quality in percents 0-100
-     *
-     * @return string
-     * @throws Exception
-     *
-     */
-    function output_base64($format = null, $quality = null) {
-
-        // Determine quality
-        $quality = $quality ?: $this->quality;
-
-        // Determine mimetype
-        switch (strtolower($format)) {
-            case 'gif':
-                $mimetype = 'image/gif';
-                break;
-            case 'jpeg':
-            case 'jpg':
-                imageinterlace($this->image, true);
-                $mimetype = 'image/jpeg';
-                break;
-            case 'png':
-                $mimetype = 'image/png';
-                break;
-            default:
-                $info = getimagesize($this->filename);
-                $mimetype = $info['mime'];
-                unset($info);
-                break;
-        }
-
-        // Output the image
-        ob_start();
-        switch ($mimetype) {
-            case 'image/gif':
-                imagegif($this->image);
-                break;
-            case 'image/jpeg':
-                imagejpeg($this->image, null, round($quality));
-                break;
-            case 'image/png':
-                imagepng($this->image, null, round(9 * $quality / 100));
-                break;
-            default:
-                throw new Exception('Unsupported image format: '.$this->filename);
-                break;
-        }
-        $image_data = ob_get_contents();
-        ob_end_clean();
-
-        // Returns formatted string for img src
-        return 'data:'.$mimetype.';base64,'.base64_encode($image_data);
-
-    }
-
-    /**
-     * Overlay
-     *
-     * Overlay an image on top of another, works with 24-bit PNG alpha-transparency
-     *
-     * @param string        $overlay        An image filename or a SimpleImage object
-     * @param string        $position       center|top|left|bottom|right|top left|top right|bottom left|bottom right
-     * @param float|int     $opacity        Overlay opacity 0-1
-     * @param int           $x_offset       Horizontal offset in pixels
-     * @param int           $y_offset       Vertical offset in pixels
-     *
-     * @return SimpleImage
-     *
-     */
-    function overlay($overlay, $position = 'center', $opacity = 1, $x_offset = 0, $y_offset = 0) {
-
-        // Load overlay image
-        if( !($overlay instanceof SimpleImage) ) {
-            $overlay = new SimpleImage($overlay);
-        }
-
-        // Convert opacity
-        $opacity = $opacity * 100;
-
-        // Determine position
-        switch (strtolower($position)) {
-            case 'top left':
-                $x = 0 + $x_offset;
-                $y = 0 + $y_offset;
-                break;
-            case 'top right':
-                $x = $this->width - $overlay->width + $x_offset;
-                $y = 0 + $y_offset;
-                break;
-            case 'top':
-                $x = ($this->width / 2) - ($overlay->width / 2) + $x_offset;
-                $y = 0 + $y_offset;
-                break;
-            case 'bottom left':
-                $x = 0 + $x_offset;
-                $y = $this->height - $overlay->height + $y_offset;
-                break;
-            case 'bottom right':
-                $x = $this->width - $overlay->width + $x_offset;
-                $y = $this->height - $overlay->height + $y_offset;
-                break;
-            case 'bottom':
-                $x = ($this->width / 2) - ($overlay->width / 2) + $x_offset;
-                $y = $this->height - $overlay->height + $y_offset;
-                break;
-            case 'left':
-                $x = 0 + $x_offset;
-                $y = ($this->height / 2) - ($overlay->height / 2) + $y_offset;
-                break;
-            case 'right':
-                $x = $this->width - $overlay->width + $x_offset;
-                $y = ($this->height / 2) - ($overlay->height / 2) + $y_offset;
-                break;
-            case 'center':
-            default:
-                $x = ($this->width / 2) - ($overlay->width / 2) + $x_offset;
-                $y = ($this->height / 2) - ($overlay->height / 2) + $y_offset;
-                break;
-        }
-
-        // Perform the overlay
-        $this->imagecopymerge_alpha($this->image, $overlay->image, $x, $y, 0, 0, $overlay->width, $overlay->height, $opacity);
-
-        return $this;
-
-    }
-
-    /**
-     * Pixelate
-     *
-     * @param int           $block_size Size in pixels of each resulting block
-     *
-     * @return SimpleImage
-     *
-     */
-    function pixelate($block_size = 10) {
-        imagefilter($this->image, IMG_FILTER_PIXELATE, $block_size, true);
-        return $this;
-    }
-
-    /**
-     * Resize an image to the specified dimensions
-     *
-     * @param int   $width
-     * @param int   $height
-     *
-     * @return SimpleImage
-     *
-     */
-    function resize($width, $height) {
-
-        // Generate new GD image
-        $new = imagecreatetruecolor($width, $height);
-
-        if( $this->original_info['format'] === 'gif' ) {
-            // Preserve transparency in GIFs
-            $transparent_index = imagecolortransparent($this->image);
-            $palletsize = imagecolorstotal($this->image);
-            if ($transparent_index >= 0 && $transparent_index < $palletsize) {
-                $transparent_color = imagecolorsforindex($this->image, $transparent_index);
-                $transparent_index = imagecolorallocate($new, $transparent_color['red'], $transparent_color['green'], $transparent_color['blue']);
-                imagefill($new, 0, 0, $transparent_index);
-                imagecolortransparent($new, $transparent_index);
-            }
-        } else {
-            // Preserve transparency in PNGs (benign for JPEGs)
-            imagealphablending($new, false);
-            imagesavealpha($new, true);
-        }
-
-        // Resize
-        imagecopyresampled($new, $this->image, 0, 0, 0, 0, $width, $height, $this->width, $this->height);
-
-        // Update meta data
-        $this->width = $width;
-        $this->height = $height;
-        $this->image = $new;
-
-        return $this;
-
-    }
-
-    /**
-     * Rotate an image
-     *
-     * @param int           $angle      0-360
-     * @param string        $bg_color   Hex color string, array(red, green, blue) or array(red, green, blue, alpha).
-     *                                  Where red, green, blue - integers 0-255, alpha - integer 0-127
-     *
-     * @return SimpleImage
-     *
-     */
-    function rotate($angle, $bg_color = '#000000') {
-
-        // Perform the rotation
-        $rgba = $this->normalize_color($bg_color);
-        $bg_color = imagecolorallocatealpha($this->image, $rgba['r'], $rgba['g'], $rgba['b'], $rgba['a']);
-        $new = imagerotate($this->image, -($this->keep_within($angle, -360, 360)), $bg_color);
-        imagesavealpha($new, true);
-        imagealphablending($new, true);
-
-        // Update meta data
-        $this->width = imagesx($new);
-        $this->height = imagesy($new);
-        $this->image = $new;
-
-        return $this;
-
-    }
-
-    /**
-     * Save an image
-     *
-     * The resulting format will be determined by the file extension.
-     *
-     * @param null|string   $filename   If omitted - original file will be overwritten
-     * @param null|int      $quality    Output image quality in percents 0-100
-     * @param null|string   $format     The format to use; determined by file extension if null
-     *
-     * @return SimpleImage
-     * @throws Exception
-     *
-     */
-    function save($filename = null, $quality = null, $format = null) {
-
-        // Determine quality, filename, and format
-        $quality = $quality ?: $this->quality;
-        $filename = $filename ?: $this->filename;
-        if( !$format ) {
-            $format = $this->file_ext($filename) ?: $this->original_info['format'];
-        }
-
-        // Create the image
-        switch (strtolower($format)) {
-            case 'gif':
-                $result = imagegif($this->image, $filename);
-                break;
-            case 'jpg':
-            case 'jpeg':
-                imageinterlace($this->image, true);
-                $result = imagejpeg($this->image, $filename, round($quality));
-                break;
-            case 'png':
-                $result = imagepng($this->image, $filename, round(9 * $quality / 100));
-                break;
-            default:
-                throw new Exception('Unsupported format');
-        }
-
-        if (!$result) {
-            throw new Exception('Unable to save image: ' . $filename);
-        }
-
-        return $this;
-
-    }
-
-    /**
-     * Sepia
-     *
-     * @return SimpleImage
-     *
-     */
-    function sepia() {
-        imagefilter($this->image, IMG_FILTER_GRAYSCALE);
-        imagefilter($this->image, IMG_FILTER_COLORIZE, 100, 50, 0);
-        return $this;
-    }
-
-    /**
-     * Sketch
-     *
-     * @return SimpleImage
-     *
-     */
-    function sketch() {
-        imagefilter($this->image, IMG_FILTER_MEAN_REMOVAL);
-        return $this;
-    }
-
-    /**
-     * Smooth
-     *
-     * @param int           $level  Min = -10, max = 10
-     *
-     * @return SimpleImage
-     *
-     */
-    function smooth($level) {
-        imagefilter($this->image, IMG_FILTER_SMOOTH, $this->keep_within($level, -10, 10));
-        return $this;
-    }
-
-    /**
-     * Add text to an image
-     *
-     * @param string        $text
-     * @param string        $font_file
-     * @param float|int     $font_size
-     * @param string|array  $color
-     * @param string        $position
-     * @param int           $x_offset
-     * @param int           $y_offset
-     * @param string|array  $stroke_color
-     * @param string        $stroke_size
-     * @param string        $alignment
-     * @param int           $letter_spacing
-     *
-     * @return SimpleImage
-     * @throws Exception
-     *
-     */
-    function text($text, $font_file, $font_size = 12, $color = '#000000', $position = 'center', $x_offset = 0, $y_offset = 0, $stroke_color = null, $stroke_size = null, $alignment = null, $letter_spacing = 0) {
-
-        // todo - this method could be improved to support the text angle
-        $angle = 0;
-
-        // Determine text color
-        if(is_array($color)) {
-            foreach($color as $var) {
-                $rgba = $this->normalize_color($var);
-                $color_arr[] = imagecolorallocatealpha($this->image, $rgba['r'], $rgba['g'], $rgba['b'], $rgba['a']);
-            }
-        } else {
-            $rgba = $this->normalize_color($color);
-            $color_arr[] = imagecolorallocatealpha($this->image, $rgba['r'], $rgba['g'], $rgba['b'], $rgba['a']);
-        }
-
-
-        // Determine textbox size
-        $box = imagettfbbox($font_size, $angle, $font_file, $text);
-        if (!$box) {
-            throw new Exception('Unable to load font: '.$font_file);
-        }
-        $box_width = abs($box[6] - $box[2]);
-        $box_height = abs($box[7] - $box[1]);
-
-        // Determine position
-        switch (strtolower($position)) {
-            case 'top left':
-                $x = 0 + $x_offset;
-                $y = 0 + $y_offset + $box_height;
-                break;
-            case 'top right':
-                $x = $this->width - $box_width + $x_offset;
-                $y = 0 + $y_offset + $box_height;
-                break;
-            case 'top':
-                $x = ($this->width / 2) - ($box_width / 2) + $x_offset;
-                $y = 0 + $y_offset + $box_height;
-                break;
-            case 'bottom left':
-                $x = 0 + $x_offset;
-                $y = $this->height - $box_height + $y_offset + $box_height;
-                break;
-            case 'bottom right':
-                $x = $this->width - $box_width + $x_offset;
-                $y = $this->height - $box_height + $y_offset + $box_height;
-                break;
-            case 'bottom':
-                $x = ($this->width / 2) - ($box_width / 2) + $x_offset;
-                $y = $this->height - $box_height + $y_offset + $box_height;
-                break;
-            case 'left':
-                $x = 0 + $x_offset;
-                $y = ($this->height / 2) - (($box_height / 2) - $box_height) + $y_offset;
-                break;
-            case 'right';
-                $x = $this->width - $box_width + $x_offset;
-                $y = ($this->height / 2) - (($box_height / 2) - $box_height) + $y_offset;
-                break;
-            case 'center':
-            default:
-                $x = ($this->width / 2) - ($box_width / 2) + $x_offset;
-                $y = ($this->height / 2) - (($box_height / 2) - $box_height) + $y_offset;
-                break;
-        }
-
-        if($alignment === "left") {
-            // Left aligned text
-            $x = -($x * 2);
-        } else if($alignment === "right") {
-            // Right aligned text
-            $dimensions = imagettfbbox($font_size, $angle, $font_file, $text);
-            $alignment_offset = abs($dimensions[4] - $dimensions[0]);
-            $x = -(($x * 2) + $alignment_offset);
-        }
-
-        // Add the text
-        imagesavealpha($this->image, true);
-        imagealphablending($this->image, true);
-
-        if(isset($stroke_color) && isset($stroke_size)) {
-
-            // Text with stroke
-            if(is_array($color) || is_array($stroke_color)) {
-                // Multi colored text and/or multi colored stroke
-
-                if(is_array($stroke_color)) {
-                    foreach($stroke_color as $key => $var) {
-                        $rgba = $this->normalize_color($stroke_color[$key]);
-                        $stroke_color[$key] = imagecolorallocatealpha($this->image, $rgba['r'], $rgba['g'], $rgba['b'], $rgba['a']);
-                    }
-                } else {
-                    $rgba = $this->normalize_color($stroke_color);
-                    $stroke_color = imagecolorallocatealpha($this->image, $rgba['r'], $rgba['g'], $rgba['b'], $rgba['a']);
-                }
-
-                $array_of_letters = str_split($text, 1);
-
-                foreach($array_of_letters as $key => $var) {
-
-                    if($key > 0) {
-                        $dimensions = imagettfbbox($font_size, $angle, $font_file, $array_of_letters[$key - 1]);
-                        $x += abs($dimensions[4] - $dimensions[0]) + $letter_spacing;
-                    }
-
-                    // If the next letter is empty, we just move forward to the next letter
-                    if($var !== " ") {
-                        $this->imagettfstroketext($this->image, $font_size, $angle, $x, $y, current($color_arr), current($stroke_color), $stroke_size, $font_file, $var);
-
-                       // #000 is 0, black will reset the array so we write it this way
-                        if(next($color_arr) === false) {
-                            reset($color_arr);
-                        }
-
-                        // #000 is 0, black will reset the array so we write it this way
-                        if(next($stroke_color) === false) {
-                            reset($stroke_color);
-                        }
-                    }
-                }
-
-            } else {
-                $rgba = $this->normalize_color($stroke_color);
-                $stroke_color = imagecolorallocatealpha($this->image, $rgba['r'], $rgba['g'], $rgba['b'], $rgba['a']);
-                $this->imagettfstroketext($this->image, $font_size, $angle, $x, $y, $color_arr[0], $stroke_color, $stroke_size, $font_file, $text);
-            }
-
-        } else {
-
-            // Text without stroke
-
-            if(is_array($color)) {
-                // Multi colored text
-
-                $array_of_letters = str_split($text, 1);
-
-                foreach($array_of_letters as $key => $var) {
-
-                    if($key > 0) {
-                        $dimensions = imagettfbbox($font_size, $angle, $font_file, $array_of_letters[$key - 1]);
-                        $x += abs($dimensions[4] - $dimensions[0]) + $letter_spacing;
-                    }
-
-                    // If the next letter is empty, we just move forward to the next letter
-                    if($var !== " ") {
-                        imagettftext($this->image, $font_size, $angle, $x, $y, current($color_arr), $font_file, $var);
-
-                        // #000 is 0, black will reset the array so we write it this way
-                        if(next($color_arr) === false) {
-                            reset($color_arr);
-                        }
-                    }
-                }
-
-            } else {
-                imagettftext($this->image, $font_size, $angle, $x, $y, $color_arr[0], $font_file, $text);
-            }
-        }
-
-        return $this;
-
-    }
-
-    /**
-     * Thumbnail
-     *
-     * This function attempts to get the image to as close to the provided dimensions as possible, and then crops the
-     * remaining overflow (from the center) to get the image to be the size specified. Useful for generating thumbnails.
-     *
-     * @param int           $width
-     * @param int|null      $height If omitted - assumed equal to $width
-     *
-     * @return SimpleImage
-     *
-     */
-    function thumbnail($width, $height = null) {
-
-        // Determine height
-        $height = $height ?: $width;
-
-        // Determine aspect ratios
-        $current_aspect_ratio = $this->height / $this->width;
-        $new_aspect_ratio = $height / $width;
-
-        // Fit to height/width
-        if ($new_aspect_ratio > $current_aspect_ratio) {
-            $this->fit_to_height($height);
-        } else {
-            $this->fit_to_width($width);
-        }
-        $left = floor(($this->width / 2) - ($width / 2));
-        $top = floor(($this->height / 2) - ($height / 2));
-
-        // Return trimmed image
-        return $this->crop($left, $top, $width + $left, $height + $top);
-
-    }
-
-    /**
-     * Returns the file extension of the specified file
-     *
-     * @param string    $filename
-     *
-     * @return string
-     *
-     */
-    protected function file_ext($filename) {
-
-        if (!preg_match('/\./', $filename)) {
-            return '';
-        }
-
-        return preg_replace('/^.*\./', '', $filename);
-
-    }
-
-    /**
-     * Get meta data of image or base64 string
-     *
-     * @param string|null       $imagestring    If omitted treat as a normal image
-     *
-     * @return SimpleImage
-     * @throws Exception
-     *
-     */
-    protected function get_meta_data() {
-        //gather meta data
-        if(empty($this->imagestring)) {
-            $info = getimagesize($this->filename);
-
-            switch ($info['mime']) {
-                case 'image/gif':
-                    $this->image = imagecreatefromgif($this->filename);
-                    break;
-                case 'image/jpeg':
-                    $this->image = imagecreatefromjpeg($this->filename);
-                    break;
-                case 'image/png':
-                    $this->image = imagecreatefrompng($this->filename);
-                    break;
-                default:
-                    throw new Exception('Invalid image: '.$this->filename);
-                    break;
-            }
-        } elseif (function_exists('getimagesizefromstring')) {
-            $info = getimagesizefromstring($this->imagestring);
-        } else {
-            throw new Exception('PHP 5.4 is required to use method getimagesizefromstring');
-        }
-
-        $this->original_info = array(
-            'width' => $info[0],
-            'height' => $info[1],
-            'orientation' => $this->get_orientation(),
-            'exif' => function_exists('exif_read_data') && $info['mime'] === 'image/jpeg' && $this->imagestring === null ? $this->exif = @exif_read_data($this->filename) : null,
-            'format' => preg_replace('/^image\//', '', $info['mime']),
-            'mime' => $info['mime']
-        );
-        $this->width = $info[0];
-        $this->height = $info[1];
-
-        imagesavealpha($this->image, true);
-        imagealphablending($this->image, true);
-
-        return $this;
-
-    }
-
-    /**
-     * Same as PHP's imagecopymerge() function, except preserves alpha-transparency in 24-bit PNGs
-     *
-     * @param $dst_im
-     * @param $src_im
-     * @param $dst_x
-     * @param $dst_y
-     * @param $src_x
-     * @param $src_y
-     * @param $src_w
-     * @param $src_h
-     * @param $pct
-     *
-     * @link http://www.php.net/manual/en/function.imagecopymerge.php#88456
-     *
-     */
-    protected function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $pct) {
-
-        // Get image width and height and percentage
-        $pct /= 100;
-        $w = imagesx($src_im);
-        $h = imagesy($src_im);
-
-        // Turn alpha blending off
-        imagealphablending($src_im, false);
-
-        // Find the most opaque pixel in the image (the one with the smallest alpha value)
-        $minalpha = 127;
-        for ($x = 0; $x < $w; $x++) {
-            for ($y = 0; $y < $h; $y++) {
-                $alpha = (imagecolorat($src_im, $x, $y) >> 24) & 0xFF;
-                if ($alpha < $minalpha) {
-                    $minalpha = $alpha;
-                }
-            }
-        }
-
-        // Loop through image pixels and modify alpha for each
-        for ($x = 0; $x < $w; $x++) {
-            for ($y = 0; $y < $h; $y++) {
-                // Get current alpha value (represents the TANSPARENCY!)
-                $colorxy = imagecolorat($src_im, $x, $y);
-                $alpha = ($colorxy >> 24) & 0xFF;
-                // Calculate new alpha
-                if ($minalpha !== 127) {
-                    $alpha = 127 + 127 * $pct * ($alpha - 127) / (127 - $minalpha);
-                } else {
-                    $alpha += 127 * $pct;
-                }
-                // Get the color index with new alpha
-                $alphacolorxy = imagecolorallocatealpha($src_im, ($colorxy >> 16) & 0xFF, ($colorxy >> 8) & 0xFF, $colorxy & 0xFF, $alpha);
-                // Set pixel with the new color + opacity
-                if (!imagesetpixel($src_im, $x, $y, $alphacolorxy)) {
-                    return;
-                }
-            }
-        }
-
-        // Copy it
-        imagesavealpha($dst_im, true);
-        imagealphablending($dst_im, true);
-        imagesavealpha($src_im, true);
-        imagealphablending($src_im, true);
-        imagecopy($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h);
-
-    }
-
-    /**
-     *  Same as imagettftext(), but allows for a stroke color and size
-     *
-     * @param  object &$image       A GD image object
-     * @param  float $size          The font size
-     * @param  float $angle         The angle in degrees
-     * @param  int $x               X-coordinate of the starting position
-     * @param  int $y               Y-coordinate of the starting position
-     * @param  int &$textcolor      The color index of the text
-     * @param  int &$stroke_color   The color index of the stroke
-     * @param  int $stroke_size     The stroke size in pixels
-     * @param  string $fontfile     The path to the font to use
-     * @param  string $text         The text to output
-     *
-     * @return array                This method has the same return values as imagettftext()
-     *
-     */
-    protected function imagettfstroketext(&$image, $size, $angle, $x, $y, &$textcolor, &$strokecolor, $stroke_size, $fontfile, $text) {
-        for( $c1 = ($x - abs($stroke_size)); $c1 <= ($x + abs($stroke_size)); $c1++ ) {
-            for($c2 = ($y - abs($stroke_size)); $c2 <= ($y + abs($stroke_size)); $c2++) {
-                $bg = imagettftext($image, $size, $angle, $c1, $c2, $strokecolor, $fontfile, $text);
-            }
-        }
-        return imagettftext($image, $size, $angle, $x, $y, $textcolor, $fontfile, $text);
-    }
-
-    /**
-     * Ensures $value is always within $min and $max range.
-     *
-     * If lower, $min is returned. If higher, $max is returned.
-     *
-     * @param int|float     $value
-     * @param int|float     $min
-     * @param int|float     $max
-     *
-     * @return int|float
-     *
-     */
-    protected function keep_within($value, $min, $max) {
-
-        if ($value < $min) {
-            return $min;
-        }
-
-        if ($value > $max) {
-            return $max;
-        }
-
-        return $value;
-
-    }
-
-    /**
-     * Converts a hex color value to its RGB equivalent
-     *
-     * @param string        $color  Hex color string, array(red, green, blue) or array(red, green, blue, alpha).
-     *                              Where red, green, blue - integers 0-255, alpha - integer 0-127
-     *
-     * @return array|bool
-     *
-     */
-    protected function normalize_color($color) {
-
-        if (is_string($color)) {
-
-            $color = trim($color, '#');
-
-            if (strlen($color) == 6) {
-                list($r, $g, $b) = array(
-                    $color[0].$color[1],
-                    $color[2].$color[3],
-                    $color[4].$color[5]
-                );
-            } elseif (strlen($color) == 3) {
-                list($r, $g, $b) = array(
-                    $color[0].$color[0],
-                    $color[1].$color[1],
-                    $color[2].$color[2]
-                );
-            } else {
-                return false;
-            }
-            return array(
-                'r' => hexdec($r),
-                'g' => hexdec($g),
-                'b' => hexdec($b),
-                'a' => 0
-            );
-
-        } elseif (is_array($color) && (count($color) == 3 || count($color) == 4)) {
-
-            if (isset($color['r'], $color['g'], $color['b'])) {
-                return array(
-                    'r' => $this->keep_within($color['r'], 0, 255),
-                    'g' => $this->keep_within($color['g'], 0, 255),
-                    'b' => $this->keep_within($color['b'], 0, 255),
-                    'a' => $this->keep_within(isset($color['a']) ? $color['a'] : 0, 0, 127)
-                );
-            } elseif (isset($color[0], $color[1], $color[2])) {
-                return array(
-                    'r' => $this->keep_within($color[0], 0, 255),
-                    'g' => $this->keep_within($color[1], 0, 255),
-                    'b' => $this->keep_within($color[2], 0, 255),
-                    'a' => $this->keep_within(isset($color[3]) ? $color[3] : 0, 0, 127)
-                );
-            }
-
-        }
-        return false;
-    }
-
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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

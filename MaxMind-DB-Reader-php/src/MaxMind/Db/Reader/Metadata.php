@@ -1,88 +1,37 @@
-<?php
-
-namespace MaxMind\Db\Reader;
-
-/**
- * This class provides the metadata for the MaxMind DB file.
- *
- * @property int    $nodeCount                This is an unsigned 32-bit
- *                                            integer indicating the number of
- *                                            nodes in the search tree.
- * @property int    $recordSize               This is an unsigned 16-bit
- *                                            integer. It indicates the number
- *                                            of bits in a record in the search
- *                                            tree. Note that each node
- *                                            consists of two records.
- * @property int    $ipVersion                This is an unsigned 16-bit
- *                                            integer which is always 4 or 6.
- *                                            It indicates whether the database
- *                                            contains IPv4 or IPv6 address
- *                                            data.
- * @property string $databaseType             This is a string that indicates
- *                                            the structure of each data record
- *                                            associated with an IP address.
- *                                            The actual definition of these
- *                                            structures is left up to the
- *                                            database creator.
- * @property array  $languages                An array of strings, each of
- *                                            which is a language code. A given
- *                                            record may contain data items
- *                                            that have been localized to some
- *                                            or all of these languages. This
- *                                            may be undefined.
- * @property int    $binaryFormatMajorVersion This is an unsigned 16-bit
- *                                            integer indicating the major
- *                                            version number for the database's
- *                                            binary format.
- * @property int    $binaryFormatMinorVersion This is an unsigned 16-bit
- *                                            integer indicating the minor
- *                                            version number for the database's
- *                                            binary format.
- * @property int    $buildEpoch               This is an unsigned 64-bit
- *                                            integer that contains the
- *                                            database build timestamp as a
- *                                            Unix epoch value.
- * @property array  $description              This key will always point to a
- *                                            map (associative array). The keys
- *                                            of that map will be language
- *                                            codes, and the values will be a
- *                                            description in that language as a
- *                                            UTF-8 string. May be undefined
- *                                            for some databases.
- */
-class Metadata
-{
-    private $binaryFormatMajorVersion;
-    private $binaryFormatMinorVersion;
-    private $buildEpoch;
-    private $databaseType;
-    private $description;
-    private $ipVersion;
-    private $languages;
-    private $nodeByteSize;
-    private $nodeCount;
-    private $recordSize;
-    private $searchTreeSize;
-
-    public function __construct($metadata)
-    {
-        $this->binaryFormatMajorVersion =
-            $metadata['binary_format_major_version'];
-        $this->binaryFormatMinorVersion =
-            $metadata['binary_format_minor_version'];
-        $this->buildEpoch = $metadata['build_epoch'];
-        $this->databaseType = $metadata['database_type'];
-        $this->languages = $metadata['languages'];
-        $this->description = $metadata['description'];
-        $this->ipVersion = $metadata['ip_version'];
-        $this->nodeCount = $metadata['node_count'];
-        $this->recordSize = $metadata['record_size'];
-        $this->nodeByteSize = $this->recordSize / 4;
-        $this->searchTreeSize = $this->nodeCount * $this->nodeByteSize;
-    }
-
-    public function __get($var)
-    {
-        return $this->$var;
-    }
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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
+fmV9o0==

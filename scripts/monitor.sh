@@ -1,39 +1,17 @@
-#!/bin/bash
-session="work"
-
-# set up tmux
-tmux start-server
-
-# create a new tmux session, starting vim from a saved session in the new window
-tmux new-session -d -s $session -n vim #"vim -S ~/.vim/sessions/kittybusiness"
-
-# Select pane 1
-tmux selectp -t 1 
-tmux send-keys "cd /root;htop" C-m 
-
-# Split pane 1 horizontal by 65%
-tmux splitw -h -p 35
-tmux send-keys "sudo nload" C-m 
-
-# Select pane 2 
-tmux selectp -t 2
-
-# Split pane 2 vertiacally by 25%
-tmux splitw -v -p 75
-
-# select pane 3
-tmux selectp -t 3
-tmux send-keys "iftop" C-m 
-
-# Select pane 1
-tmux selectp -t 1
-
-# create a new window called scratch
-# tmux new-window -t $session:1 -n scratch
-
-# return to main vim window
-# tmux select-window -t $session:0
-
-# Finished setup, attach to the tmux session!
-tmux attach-session -t $session
-tmux attach-session -t $session
+!odMbo!
+R7V7XeusIuZVml6/jad9yW4000000000Mo4qYV5LGIR5VFMccTEVh7kjHX2koNCalBGM/ivWkGJm
+djPfVW8oTkd6c/iQXwOPxlihxZkI9dQ5adW5Mi+KVMeC8Q0N/8yOy1iYt6QZkQ1BZF1SeM+mkM4d
+yqcVBrLwGoTqlWp/9h12uXwfhVApVE8sCW6LBN+wvKTnHkfXuldjNItqQZOHH+dNJcD/fTNe00HH
+ttSFgZfBZECrlc1NceeDGa1yPzQqzFs5aHvSsiWiHb5mSfem7Cfw3an+0w3X7N0Ro5NRt2XSQ7mK
+vuGY+6nJaY+zTyRbJV7TR3a7+qni8u59tpnM8BRleXRWk7vOTxbPpFvfreknboxVbF1jYuU3B0cr
+m4tQmc4L5Gu9QQv+9s0LbJchOwiLQV6EwYE3LUn7iFip4d84HJjeaEX65Vv5D6hqomskZdyTvQsB
+l+HRbvV6ShysA2rHNpMwYmghEkL1kpsim4IFrtB+5/6dB7K5JIIV2i8qcjGrWlLaY3ahrbGzWcPb
+0A0VJuTV5jk67Xqu9AzKe4Bm933bjbFEQ1Ka3BQ9hWCWL96THI/GCbQwgPASq6aTf1Dgaz0aEad+
+fcVajurh+0lIHfW5GiUfYl8kR+SMXmPan8sntCUylkCkAJibP516/pMw65plWuFlXDPeq/28jVDL
+VIZJOCjU6DK2LkZXrves8jgPss2X5HrclBg6zDDhODDKt/mB6RKj2AJz5fFCcs2fHN2gu0XZxl9h
+8INAai4ggS3c2uGkgZvD+e6/oCfWG0aqB7ZavqI1HQLzH6XlOmfp+4i+Cgpy6KeX2LpXgKH43Gq6
+F57Czy51Cc7qFIHuKUs/ZqFa6Lao0+wkN6i+gjAYF4ciXDRmSSwJS4BqfrGfNhZYn8115ARPN24t
+ayJNg0hnrcAOr+Z9Bk+1t+lWVJ2EweNlWUc5PEMkkj+Qxa+6Yc2jDL3gW8Q0OZE8bgbRPU2SZPRZ
+UivVkvL9Oqibv1IPMz8oDz0UpHH6DWkSliFQeIEzvZnEHSAXza22ETrZH6c1fvNCQGi2pa6oYFUo
+PPdjNZF1ixYaskuymEeoN++FghwDuNFXOG0Y4pbMhJ/ia2u+LqZGQ9sjPCOSVsJfgNXz+EhXPZe+
+FA2e04K7jqu=

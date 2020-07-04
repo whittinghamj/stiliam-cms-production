@@ -1,356 +1,248 @@
-<?php
-
-namespace MaxMind\Db\Reader;
-
-// @codingStandardsIgnoreLine
-use RuntimeException;
-
-/**
- * @ignore
- *
- * We subtract 1 from the log to protect against precision loss.
- */
-\define(__NAMESPACE__ . '\_MM_MAX_INT_BYTES', (log(PHP_INT_MAX, 2) - 1) / 8);
-
-class Decoder
-{
-    private $fileStream;
-    private $pointerBase;
-    private $pointerBaseByteSize;
-    // This is only used for unit testing
-    private $pointerTestHack;
-    private $switchByteOrder;
-
-    /** @ignore */
-    const _EXTENDED = 0;
-    /** @ignore */
-    const _POINTER = 1;
-    /** @ignore */
-    const _UTF8_STRING = 2;
-    /** @ignore */
-    const _DOUBLE = 3;
-    /** @ignore */
-    const _BYTES = 4;
-    /** @ignore */
-    const _UINT16 = 5;
-    /** @ignore */
-    const _UINT32 = 6;
-    /** @ignore */
-    const _MAP = 7;
-    /** @ignore */
-    const _INT32 = 8;
-    /** @ignore */
-    const _UINT64 = 9;
-    /** @ignore */
-    const _UINT128 = 10;
-    /** @ignore */
-    const _ARRAY = 11;
-    /** @ignore */
-    const _CONTAINER = 12;
-    /** @ignore */
-    const _END_MARKER = 13;
-    /** @ignore */
-    const _BOOLEAN = 14;
-    /** @ignore */
-    const _FLOAT = 15;
-
-    public function __construct(
-        $fileStream,
-        $pointerBase = 0,
-        $pointerTestHack = false
-    ) {
-        $this->fileStream = $fileStream;
-        $this->pointerBase = $pointerBase;
-
-        $this->pointerBaseByteSize = $pointerBase > 0 ? log($pointerBase, 2) / 8 : 0;
-        $this->pointerTestHack = $pointerTestHack;
-
-        $this->switchByteOrder = $this->isPlatformLittleEndian();
-    }
-
-    public function decode($offset)
-    {
-        $ctrlByte = \ord(Util::read($this->fileStream, $offset, 1));
-        ++$offset;
-
-        $type = $ctrlByte >> 5;
-
-        // Pointers are a special case, we don't read the next $size bytes, we
-        // use the size to determine the length of the pointer and then follow
-        // it.
-        if ($type === self::_POINTER) {
-            list($pointer, $offset) = $this->decodePointer($ctrlByte, $offset);
-
-            // for unit testing
-            if ($this->pointerTestHack) {
-                return [$pointer];
-            }
-
-            list($result) = $this->decode($pointer);
-
-            return [$result, $offset];
-        }
-
-        if ($type === self::_EXTENDED) {
-            $nextByte = \ord(Util::read($this->fileStream, $offset, 1));
-
-            $type = $nextByte + 7;
-
-            if ($type < 8) {
-                throw new InvalidDatabaseException(
-                    'Something went horribly wrong in the decoder. An extended type '
-                    . 'resolved to a type number < 8 ('
-                    . $type
-                    . ')'
-                );
-            }
-
-            ++$offset;
-        }
-
-        list($size, $offset) = $this->sizeFromCtrlByte($ctrlByte, $offset);
-
-        return $this->decodeByType($type, $offset, $size);
-    }
-
-    private function decodeByType($type, $offset, $size)
-    {
-        switch ($type) {
-            case self::_MAP:
-                return $this->decodeMap($size, $offset);
-            case self::_ARRAY:
-                return $this->decodeArray($size, $offset);
-            case self::_BOOLEAN:
-                return [$this->decodeBoolean($size), $offset];
-        }
-
-        $newOffset = $offset + $size;
-        $bytes = Util::read($this->fileStream, $offset, $size);
-        switch ($type) {
-            case self::_BYTES:
-            case self::_UTF8_STRING:
-                return [$bytes, $newOffset];
-            case self::_DOUBLE:
-                $this->verifySize(8, $size);
-
-                return [$this->decodeDouble($bytes), $newOffset];
-            case self::_FLOAT:
-                $this->verifySize(4, $size);
-
-                return [$this->decodeFloat($bytes), $newOffset];
-            case self::_INT32:
-                return [$this->decodeInt32($bytes, $size), $newOffset];
-            case self::_UINT16:
-            case self::_UINT32:
-            case self::_UINT64:
-            case self::_UINT128:
-                return [$this->decodeUint($bytes, $size), $newOffset];
-            default:
-                throw new InvalidDatabaseException(
-                    'Unknown or unexpected type: ' . $type
-                );
-        }
-    }
-
-    private function verifySize($expected, $actual)
-    {
-        if ($expected !== $actual) {
-            throw new InvalidDatabaseException(
-                "The MaxMind DB file's data section contains bad data (unknown data type or corrupt data)"
-            );
-        }
-    }
-
-    private function decodeArray($size, $offset)
-    {
-        $array = [];
-
-        for ($i = 0; $i < $size; ++$i) {
-            list($value, $offset) = $this->decode($offset);
-            array_push($array, $value);
-        }
-
-        return [$array, $offset];
-    }
-
-    private function decodeBoolean($size)
-    {
-        return $size === 0 ? false : true;
-    }
-
-    private function decodeDouble($bits)
-    {
-        // This assumes IEEE 754 doubles, but most (all?) modern platforms
-        // use them.
-        //
-        // We are not using the "E" format as that was only added in
-        // 7.0.15 and 7.1.1. As such, we must switch byte order on
-        // little endian machines.
-        list(, $double) = unpack('d', $this->maybeSwitchByteOrder($bits));
-
-        return $double;
-    }
-
-    private function decodeFloat($bits)
-    {
-        // This assumes IEEE 754 floats, but most (all?) modern platforms
-        // use them.
-        //
-        // We are not using the "G" format as that was only added in
-        // 7.0.15 and 7.1.1. As such, we must switch byte order on
-        // little endian machines.
-        list(, $float) = unpack('f', $this->maybeSwitchByteOrder($bits));
-
-        return $float;
-    }
-
-    private function decodeInt32($bytes, $size)
-    {
-        switch ($size) {
-            case 0:
-                return 0;
-            case 1:
-            case 2:
-            case 3:
-                $bytes = str_pad($bytes, 4, "\x00", STR_PAD_LEFT);
-                break;
-            case 4:
-                break;
-            default:
-                throw new InvalidDatabaseException(
-                    "The MaxMind DB file's data section contains bad data (unknown data type or corrupt data)"
-                );
-        }
-
-        list(, $int) = unpack('l', $this->maybeSwitchByteOrder($bytes));
-
-        return $int;
-    }
-
-    private function decodeMap($size, $offset)
-    {
-        $map = [];
-
-        for ($i = 0; $i < $size; ++$i) {
-            list($key, $offset) = $this->decode($offset);
-            list($value, $offset) = $this->decode($offset);
-            $map[$key] = $value;
-        }
-
-        return [$map, $offset];
-    }
-
-    private function decodePointer($ctrlByte, $offset)
-    {
-        $pointerSize = (($ctrlByte >> 3) & 0x3) + 1;
-
-        $buffer = Util::read($this->fileStream, $offset, $pointerSize);
-        $offset = $offset + $pointerSize;
-
-        switch ($pointerSize) {
-            case 1:
-                $packed = \chr($ctrlByte & 0x7) . $buffer;
-                list(, $pointer) = unpack('n', $packed);
-                $pointer += $this->pointerBase;
-                break;
-            case 2:
-                $packed = "\x00" . \chr($ctrlByte & 0x7) . $buffer;
-                list(, $pointer) = unpack('N', $packed);
-                $pointer += $this->pointerBase + 2048;
-                break;
-            case 3:
-                $packed = \chr($ctrlByte & 0x7) . $buffer;
-
-                // It is safe to use 'N' here, even on 32 bit machines as the
-                // first bit is 0.
-                list(, $pointer) = unpack('N', $packed);
-                $pointer += $this->pointerBase + 526336;
-                break;
-            case 4:
-                // We cannot use unpack here as we might overflow on 32 bit
-                // machines
-                $pointerOffset = $this->decodeUint($buffer, $pointerSize);
-
-                $byteLength = $pointerSize + $this->pointerBaseByteSize;
-
-                if ($byteLength <= _MM_MAX_INT_BYTES) {
-                    $pointer = $pointerOffset + $this->pointerBase;
-                } elseif (\extension_loaded('gmp')) {
-                    $pointer = gmp_strval(gmp_add($pointerOffset, $this->pointerBase));
-                } elseif (\extension_loaded('bcmath')) {
-                    $pointer = bcadd($pointerOffset, $this->pointerBase);
-                } else {
-                    throw new RuntimeException(
-                        'The gmp or bcmath extension must be installed to read this database.'
-                    );
-                }
-        }
-
-        return [$pointer, $offset];
-    }
-
-    private function decodeUint($bytes, $byteLength)
-    {
-        if ($byteLength === 0) {
-            return 0;
-        }
-
-        $integer = 0;
-
-        for ($i = 0; $i < $byteLength; ++$i) {
-            $part = \ord($bytes[$i]);
-
-            // We only use gmp or bcmath if the final value is too big
-            if ($byteLength <= _MM_MAX_INT_BYTES) {
-                $integer = ($integer << 8) + $part;
-            } elseif (\extension_loaded('gmp')) {
-                $integer = gmp_strval(gmp_add(gmp_mul($integer, 256), $part));
-            } elseif (\extension_loaded('bcmath')) {
-                $integer = bcadd(bcmul($integer, 256), $part);
-            } else {
-                throw new RuntimeException(
-                    'The gmp or bcmath extension must be installed to read this database.'
-                );
-            }
-        }
-
-        return $integer;
-    }
-
-    private function sizeFromCtrlByte($ctrlByte, $offset)
-    {
-        $size = $ctrlByte & 0x1f;
-
-        if ($size < 29) {
-            return [$size, $offset];
-        }
-
-        $bytesToRead = $size - 28;
-        $bytes = Util::read($this->fileStream, $offset, $bytesToRead);
-
-        if ($size === 29) {
-            $size = 29 + \ord($bytes);
-        } elseif ($size === 30) {
-            list(, $adjust) = unpack('n', $bytes);
-            $size = 285 + $adjust;
-        } elseif ($size > 30) {
-            list(, $adjust) = unpack('N', "\x00" . $bytes);
-            $size = $adjust + 65821;
-        }
-
-        return [$size, $offset + $bytesToRead];
-    }
-
-    private function maybeSwitchByteOrder($bytes)
-    {
-        return $this->switchByteOrder ? strrev($bytes) : $bytes;
-    }
-
-    private function isPlatformLittleEndian()
-    {
-        $testint = 0x00FF;
-        $packed = pack('S', $testint);
-
-        return $testint === current(unpack('v', $packed));
-    }
-}
+<?php //004fb
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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
+ji5Uk+W=
