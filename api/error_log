@@ -1,0 +1,12 @@
+[31-Jan-2018 11:52:04 UTC] PHP Parse error:  syntax error, unexpected end of file in /home2/deltacolo/public_html/zeus/api/index.php on line 40
+[31-Jan-2018 11:52:11 UTC] PHP Parse error:  syntax error, unexpected end of file in /home2/deltacolo/public_html/zeus/api/index.php on line 40
+[31-Jan-2018 11:52:16 UTC] PHP Parse error:  syntax error, unexpected end of file in /home2/deltacolo/public_html/zeus/api/index.php on line 40
+[31-Jan-2018 11:54:06 UTC] PHP Parse error:  syntax error, unexpected end of file in /home2/deltacolo/public_html/zeus/api/index.php on line 40
+[31-Jan-2018 11:54:10 UTC] PHP Parse error:  syntax error, unexpected end of file in /home2/deltacolo/public_html/zeus/api/index.php on line 40
+[31-Jan-2018 11:55:58 UTC] PHP Warning:  include(inc/db.php): failed to open stream: No such file or directory in /home2/deltacolo/public_html/zeus/api/index.php on line 6
+[31-Jan-2018 11:55:58 UTC] PHP Warning:  include(inc/db.php): failed to open stream: No such file or directory in /home2/deltacolo/public_html/zeus/api/index.php on line 6
+[31-Jan-2018 11:55:58 UTC] PHP Warning:  include(): Failed opening 'inc/db.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home2/deltacolo/public_html/zeus/api/index.php on line 6
+[31-Jan-2018 11:55:58 UTC] PHP Warning:  include(inc/sessions.php): failed to open stream: No such file or directory in /home2/deltacolo/public_html/zeus/api/index.php on line 7
+[31-Jan-2018 11:55:58 UTC] PHP Warning:  include(inc/sessions.php): failed to open stream: No such file or directory in /home2/deltacolo/public_html/zeus/api/index.php on line 7
+[31-Jan-2018 11:55:58 UTC] PHP Warning:  include(): Failed opening 'inc/sessions.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home2/deltacolo/public_html/zeus/api/index.php on line 7
+[31-Jan-2018 11:55:58 UTC] PHP Fatal error:  Class 'SessionManager' not found in /home2/deltacolo/public_html/zeus/api/index.php on line 8
