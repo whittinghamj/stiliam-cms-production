@@ -1,51 +1,43 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
-cCN5FGQg7WcBQnT4/jccAgMf9bQqMg/6XV2A
+<?php
+
+class AutoLoader extends Base {
+
+    public function __construct(){
+        return $this;
+    }
+
+    public function load_file($path_to_file){
+        $approved_formats = array();
+        if(is_file($path_to_file)){
+            $file_info = pathinfo($path_to_file);
+            if(in_array($file_info["extension"], $approved_formats)){
+                require_once($path_to_file);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function load_directory($directory_to_load, $recursive = false){
+        if(is_dir($directory_to_load)){
+            $scan_dir = scandir($directory_to_load);
+            foreach($scan_dir as $item){
+                if($item == "." || ".."){ continue; }
+                $path_to_item = $directory_to_load . DIRECTORY_SEPARATOR . $dir;
+                if(is_dir($path_to_item)){
+                    if($recursive == true){
+                        $this->load_directory($path_to_item, $recursive);
+                    }
+                }
+
+                if(is_file($path_to_item)){
+                    $this->load_file($path_to_item);
+                }
+            }
+            return true;
+        }
+
+        return false;
+    }
+}

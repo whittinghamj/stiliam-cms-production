@@ -1,48 +1,21 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+<?php
+
+// get system stats
+$stats = shell_exec("sh /opt/stiliam-server-monitor/system_stats.sh");
+
+// convert to php array
+$stats = json_decode( $stats, true );
+
+// parse
+$stats['cpu_speed'] 			= number_format( $stats['cpu_speed'], 2 );
+$stats['bandwidth_up'] 			= number_format( ( $stats['bandwidth_up'] / 125 ), 2 );
+$stats['bandwidth_down'] 		= number_format( ( $stats['bandwidth_down'] / 125 ), 2 );
+
+// convert to json array
+$stats = json_encode( $stats );
+
+// echo stats
+echo $stats;
+
+// exit
+exit;

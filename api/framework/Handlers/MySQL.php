@@ -1,51 +1,42 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
-jAGCJgTODMuTuLMt8bySzW==
+<?php
+
+class MySQL extends Base {
+
+    private $hostname = "localhost";
+    private $username = "slipstream";
+    private $password = "admin1372";
+    private $database = "slipstream_cms";
+    private $port     = 3306;
+    private $dsn;
+
+    public $connection;
+
+    public function __construct(){
+
+    }
+
+    private function create_dsn(){
+        $this->dsn = "mysql:host=" . $this->hostname .";";
+        if($this->port != "3306" || !is_null($this->port)){
+            $this->dsn .= "port=" . $this->port . ";";
+        }
+        $this->dsn .= "dbname=" . $this->database;
+        return true;
+    }
+
+    private function connect(){
+        if(isset($this->dsn) && !empty($this->dsn)){
+            try {
+                $this->connection = new PDO($this->dsn, $this->username, $this->password, array(PDO::ATTR_PERSISTENT => true));
+                return true;
+            } catch (Exception $e){
+                return $e;
+            }
+        }
+    }
+
+    public function reconnect(){
+        return $this->connect();
+    }
+
+}

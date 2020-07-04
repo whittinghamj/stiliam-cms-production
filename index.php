@@ -1,111 +1,105 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+<?php
+session_start();
+include ('inc/db.php');
+include ('inc/global_vars.php');
+include ('inc/functions.php');
 ?>
-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
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title><?php echo $site['title']; ?></title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- icons -->
+        <link rel="apple-touch-icon" sizes="57x57" href="img/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="img/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="img/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="img/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="img/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="img/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="img/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="img/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+        <link rel="manifest" href="img/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="img/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
+
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+
+        <!-- icheck bootstrap -->
+        <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
+
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/adminlte.min.css" />
+
+        <!-- Google Font: Source Sans Pro -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+    </head>
+    <body class="hold-transition login-page">
+        <div class="login-box">
+            <div class="login-logo">
+                <img src="img/stiliam_logo.png" alt="Logo" class="img-circle" width="25%" style="opacity: 0.8;" />
+            </div>
+            <!-- /.login-logo -->
+            <div class="card">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">Sign In Required</p>
+
+                    <form action="login.php" method="post">
+                        <div class="input-group mb-3">
+                            <input type="text" id="username" name="username" class="form-control" placeholder="Username" />
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Password" />
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script src="plugins/jquery/jquery.min.js"></script>
+        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="dist/js/adminlte.min.js"></script>
+
+        <script>
+            $(function() { $('[name="username"]').focus(); });
+        </script>
+
+        <!-- background image -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+
+        <script>
+            $.backstretch([
+                // "img/background_1.jpg",
+                "img/background_2.jpg",
+            ], {duration: 5000, fade: 750});
+        </script>
+    </body>
+</html>

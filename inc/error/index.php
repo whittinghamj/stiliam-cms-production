@@ -1,54 +1,85 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Errors</title>
+	<style type="text/css">
+		body {
+			font: 18px Helvetica, Arial;
+		}
+
+		li {
+			margin-bottom: 30px;
+		}
+
+		a {
+			color: #00f;
+		}
+
+		.source {
+			color: #777;
+		}
+	</style>
+</head>
+<body>
+	<h2>Sample Errors</h2>
+	<ul>
+		<li>
+			<div>
+				<a href="basic.php">Basic PHP Error</a>
+				&nbsp;&bull;&nbsp;
+				<a href="basic.phps" class="source">Source</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="hide.php">Basic PHP Error With Generic Error Page</a>
+				&nbsp;&bull;&nbsp;
+				<a href="hide.phps" class="source">Source</a>
+			</div>
+			This is the general use, you can show the generic error page to
+			users,<br /> and you can email the error report to the admins.<br />
+			See project screenshots to see error report emails.
+		</li>
+		<li>
+			<div>
+				<a href="functions.php">Detailed Stack Backtrace</a>
+				&nbsp;&bull;&nbsp;
+				<a href="functions.phps" class="source">Source</a>
+			</div>
+			See the stack backtrace table to navigate to your actual error.
+		</li>
+		<li>
+			<div>
+				<a href="custom_error.php">Custom Error</a>
+				&nbsp;&bull;&nbsp;
+				<a href="custom_error.phps" class="source">Source</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="exception.php">Basic Exception</a>
+				&nbsp;&bull;&nbsp;
+				<a href="exception.phps" class="source">Source</a>
+			</div>
+			Any kind of not-catched php exception displayed with detailed backtrace.
+		</li>
+		<li>
+			<div>
+				<a href="exception_trace.php">Detailed Stack Backtrace in Exceptions</a>
+				&nbsp;&bull;&nbsp;
+				<a href="exception_trace.phps" class="source">Source</a>
+			</div>
+			See the stack backtrace table to navigate to your actual exception's location.
+		</li>
+		<li>
+			<div>
+				<a href="basic.php?get_parameter=myvalue&test=1&param_array[num1]=15&param_array[num2]=10">GET, POST Arrays</a>
+			</div>
+			See the $_GET array content, it's multi-dimmension array.<br />
+			There is no POST data, if you have POST data in your page,<br />
+			error reporter will show POST data in a separate section.
+		</li>
+	</ul>
+</body>
+</html>

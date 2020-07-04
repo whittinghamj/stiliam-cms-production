@@ -1,33 +1,26 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+<?php
+
+namespace MaxMind\Db\Reader;
+
+class Util
+{
+    public static function read($stream, $offset, $numberOfBytes)
+    {
+        if ($numberOfBytes === 0) {
+            return '';
+        }
+        if (fseek($stream, $offset) === 0) {
+            $value = fread($stream, $numberOfBytes);
+
+            // We check that the number of bytes read is equal to the number
+            // asked for. We use ftell as getting the length of $value is
+            // much slower.
+            if (ftell($stream) - $offset === $numberOfBytes) {
+                return $value;
+            }
+        }
+        throw new InvalidDatabaseException(
+            'The MaxMind DB file contains bad data'
+        );
+    }
+}

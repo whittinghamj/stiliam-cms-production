@@ -1,374 +1,362 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
-WLl3+QQj9l780W==
+<!--
+<button type="button" class="btn btn-primary btn-xs btn-flat" data-toggle="modal" data-target="#new_output_stream_modal">New Output Stream</button>
+-->
+
+<div class="modal fade" id="sample_help_modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Title_Goes_Here</h4>
+            </div>
+            <div class="modal-body">
+            	Body Here
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="help_server_info" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Help</h4>
+            </div>
+            <div class="modal-body">
+				<p>
+					The details on this view are gathered from your server every 1-2 minutes. There are for reference only.
+				</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="help_server_settings" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Help</h4>
+            </div>
+            <div class="modal-body">
+				<p>
+					1. Give your server a friendly name. <br>
+					2. Enter a HTTP port number to use. If your server is behind a NAT firewall then this would be the public facing port only. SlipStream will run on port 1202 regardless what you enter here. <br>
+					3. Enter a valid FQDN hostname here if you like.
+				</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="help_server_sources" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Help</h4>
+            </div>
+            <div class="modal-body">
+				<p>
+					This view shows any DVB sources found on your server. If the headend software you are using is configured correctly and SlipStream can talk to it, then we will also display stream / channel information as well.
+				</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="help_server_gpus" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Help</h4>
+            </div>
+            <div class="modal-body">
+				<p>
+					This view shows any NVIDIA GPU cards that were found on your server. We have provided you with a summary of the usage / stats of each card.
+				</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="party">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <center>
+                        System Lockdown
+                    </center>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <?php echo $global_settings['lockdown_message']; ?>
+            </div>
+            <div class="modal-footer">
+                <a href="dashboard.php?c=licensing" class="btn btn-success" >Licensing</a>
+                <a href="dashboard.php?c=servers" class="btn btn-warning" >Servers</a>
+                <a href="https://clients.deltacolo.com" class="btn btn-default" >Support &amp; Billing Portal</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="help_server_stats" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Help</h4>
+            </div>
+            <div class="modal-body">
+				<p>
+					This view shows real time stats for your CPU, RAM and Bandwidth. They are updated every 1-2 seconds.
+				</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="help_server_stats" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Help</h4>
+            </div>
+            <div class="modal-body">
+				<p>
+					This view shows real time stats for your CPU, RAM and Bandwidth. They are updated every 1-2 seconds.
+				</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="help_dashboard_map" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Help</h4>
+            </div>
+            <div class="modal-body">
+				<p>
+					This view shows the estimated location on your servers on a global map.
+				</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="help_streams_source_summary" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Help</h4>
+            </div>
+            <div class="modal-body">
+				<p>
+					This is an overview of the different sources you use. They are groups by the top level domain name / IP address and they the total number of streams from each source / domain / IP. This is for your reference only.
+				</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="help_streams" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Help</h4>
+            </div>
+            <div class="modal-body">
+				<p>
+					This view provides you with a summary and stats for all your streams. Information is updated every 1-2 minutes. <br><br>
+
+					Your source streams are listed and then by clicking on the green + symbol on the left hand side will reveal additional information including your putput streams.
+				</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-terms">
+    <div class="modal-dialog" style="width: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Terms and Conditions</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+    <h2>Welcome to SlipStream CMS</h2>
+        <p>These terms and conditions outline the rules and regulations for the use of SlipStream CMS's Website.</p> <br /> 
+
+        <p>By accessing this website we assume you accept these terms and conditions in full. Do not continue to use SlipStream CMS's website 
+        if you do not accept all of the terms and conditions stated on this page.</p>
+        <p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice
+        and any or all Agreements: "Client", "You" and "Your" refers to you, the person accessing this website
+        and accepting the Company's terms and conditions. "The Company", "Ourselves", "We", "Our" and "Us", refers
+        to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves, or either the Client
+        or ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake
+        the process of our assistance to the Client in the most appropriate manner, whether by formal meetings
+        of a fixed duration, or any other means, for the express purpose of meeting the Client's needs in respect
+        of provision of the Company's stated services/products, in accordance with and subject to, prevailing law
+        of . Any use of the above terminology or other words in the singular, plural,
+        capitalisation and/or he/she or they, are taken as interchangeable and therefore as referring to same.</p><h2>Cookies</h2>
+        <p>We employ the use of cookies. By using SlipStream CMS's website you consent to the use of cookies 
+        in accordance with SlipStream CMS's privacy policy.</p><p>Most of the modern day interactive web sites
+        use cookies to enable us to retrieve user details for each visit. Cookies are used in some areas of our site
+        to enable the functionality of this area and ease of use for those people visiting. Some of our 
+        affiliate / advertising partners may also use cookies.</p><h2>License</h2>
+        <p>Unless otherwise stated, SlipStream CMS and/or it's licensors own the intellectual property rights for
+        all material on SlipStream CMS. All intellectual property rights are reserved. You may view and/or print
+        pages from https://www.slipstreamiptv.com for your own personal use subject to restrictions set in these terms and conditions.</p>
+        <p>You must not:</p>
+        <ol>
+            <li>Republish material from https://www.slipstreamiptv.com</li>
+            <li>Sell, rent or sub-license material from https://www.slipstreamiptv.com</li>
+            <li>Reproduce, duplicate or copy material from https://www.slipstreamiptv.com</li>
+        </ol>
+        <p>Redistribute content from SlipStream CMS (unless content is specifically made for redistribution).</p>
+    <h2>Hyperlinking to our Content</h2>
+        <ol>
+            <li>The following organizations may link to our Web site without prior written approval:
+                <ol>
+                <li>Government agencies;</li>
+                <li>Search engines;</li>
+                <li>News organizations;</li>
+                <li>Online directory distributors when they list us in the directory may link to our Web site in the same
+                    manner as they hyperlink to the Web sites of other listed businesses; and</li>
+                <li>Systemwide Accredited Businesses except soliciting non-profit organizations, charity shopping malls,
+                    and charity fundraising groups which may not hyperlink to our Web site.</li>
+                </ol>
+            </li>
+        </ol>
+        <ol start="2">
+            <li>These organizations may link to our home page, to publications or to other Web site information so long
+                as the link: (a) is not in any way misleading; (b) does not falsely imply sponsorship, endorsement or
+                approval of the linking party and its products or services; and (c) fits within the context of the linking
+                party's site.
+            </li>
+            <li>We may consider and approve in our sole discretion other link requests from the following types of organizations:
+                <ol>
+                    <li>commonly-known consumer and/or business information sources such as Chambers of Commerce, American
+                        Automobile Association, AARP and Consumers Union;</li>
+                    <li>dot.com community sites;</li>
+                    <li>associations or other groups representing charities, including charity giving sites,</li>
+                    <li>online directory distributors;</li>
+                    <li>internet portals;</li>
+                    <li>accounting, law and consulting firms whose primary clients are businesses; and</li>
+                    <li>educational institutions and trade associations.</li>
+                </ol>
+            </li>
+        </ol>
+        <p>We will approve link requests from these organizations if we determine that: (a) the link would not reflect
+        unfavorably on us or our accredited businesses (for example, trade associations or other organizations
+        representing inherently suspect types of business, such as work-at-home opportunities, shall not be allowed
+        to link); (b)the organization does not have an unsatisfactory record with us; (c) the benefit to us from
+        the visibility associated with the hyperlink outweighs the absence of SlipStream CMS; and (d) where the
+        link is in the context of general resource information or is otherwise consistent with editorial content
+        in a newsletter or similar product furthering the mission of the organization.</p>
+
+        <p>These organizations may link to our home page, to publications or to other Web site information so long as
+        the link: (a) is not in any way misleading; (b) does not falsely imply sponsorship, endorsement or approval
+        of the linking party and it products or services; and (c) fits within the context of the linking party's
+        site.</p>
+
+        <p>If you are among the organizations listed in paragraph 2 above and are interested in linking to our website,
+        you must notify us by sending an e-mail to <a href="mailto:info@slipstreamiptv.com" title="send an email to info@slipstreamiptv.com">info@slipstreamiptv.com</a>.
+        Please include your name, your organization name, contact information (such as a phone number and/or e-mail
+        address) as well as the URL of your site, a list of any URLs from which you intend to link to our Web site,
+        and a list of the URL(s) on our site to which you would like to link. Allow 2-3 weeks for a response.</p>
+
+        <p>Approved organizations may hyperlink to our Web site as follows:</p>
+
+        <ol>
+            <li>By use of our corporate name; or</li>
+            <li>By use of the uniform resource locator (Web address) being linked to; or</li>
+            <li>By use of any other description of our Web site or material being linked to that makes sense within the
+                context and format of content on the linking party's site.</li>
+        </ol>
+        <p>No use of SlipStream CMS's logo or other artwork will be allowed for linking absent a trademark license
+        agreement.</p>
+    <h2>Iframes</h2>
+        <p>Without prior approval and express written permission, you may not create frames around our Web pages or
+        use other techniques that alter in any way the visual presentation or appearance of our Web site.</p>
+    <h2>Reservation of Rights</h2>
+        <p>We reserve the right at any time and in its sole discretion to request that you remove all links or any particular
+        link to our Web site. You agree to immediately remove all links to our Web site upon such request. We also
+        reserve the right to amend these terms and conditions and its linking policy at any time. By continuing
+        to link to our Web site, you agree to be bound to and abide by these linking terms and conditions.</p>
+    <h2>Removal of links from our website</h2>
+        <p>If you find any link on our Web site or any linked web site objectionable for any reason, you may contact
+        us about this. We will consider requests to remove links but will have no obligation to do so or to respond
+        directly to you.</p>
+        <p>Whilst we endeavour to ensure that the information on this website is correct, we do not warrant its completeness
+        or accuracy; nor do we commit to ensuring that the website remains available or that the material on the
+        website is kept up to date.</p>
+    <h2>Content Liability</h2>
+        <p>We shall have no responsibility or liability for any content appearing on your Web site. You agree to indemnify
+        and defend us against all claims arising out of or based upon your Website. No link(s) may appear on any
+        page on your Web site or within any context containing content or materials that may be interpreted as
+        libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or
+        other violation of, any third party rights.</p>
+    <h2>Disclaimer</h2>
+        <p>To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website (including, without limitation, any warranties implied by law in respect of satisfactory quality, fitness for purpose and/or the use of reasonable care and skill). Nothing in this disclaimer will:</p>
+        <ol>
+        <li>limit or exclude our or your liability for death or personal injury resulting from negligence;</li>
+        <li>limit or exclude our or your liability for fraud or fraudulent misrepresentation;</li>
+        <li>limit any of our or your liabilities in any way that is not permitted under applicable law; or</li>
+        <li>exclude any of our or your liabilities that may not be excluded under applicable law.</li>
+        </ol>
+        <p>The limitations and exclusions of liability set out in this Section and elsewhere in this disclaimer: (a)
+        are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer or
+        in relation to the subject matter of this disclaimer, including liabilities arising in contract, in tort
+        (including negligence) and for breach of statutory duty.</p>
+        <p>To the extent that the website and the information and services on the website are provided free of charge,
+        we will not be liable for any loss or damage of any nature.</p>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="actions.php?a=accept_terms" class="btn btn-success">Accept</a>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>

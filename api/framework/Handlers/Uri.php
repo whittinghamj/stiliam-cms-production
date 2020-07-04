@@ -1,76 +1,87 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
-4g3mJA6I
+<?php
+
+class Uri {
+
+    public $BaseUri      = "";
+    public $Controller;
+    public $Action;
+    public $Uri_Params   = array();
+    public $Query_Params = array();
+
+    public function __construct(){
+        if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on'){
+            $this->BaseUri = "http";
+        } else {
+            $this->BaseUri = "https";
+        }
+
+        $this->BaseUri .= "://" . $_SERVER["HTTP_HOST"]."/";
+        $this->parseUri();
+    }
+
+    public function parseUri(){
+        $strip_api = ltrim($_SERVER["REQUEST_URI"], "/api");
+        if($strip_api = "" || $strip_api == "/"){
+            $this->Controller = "index";
+            $this->Action     = "index";
+        } else {
+            if(strtok($strip_api, "?")){
+                $split_query        = explode("?", $strip_api);
+                $uri                = $split_query[0];
+                if($uri == "c"){
+                    $this->Controller = "functions";
+                    $this->Action     = $uri;
+                    return;
+                } else {
+                    $query              = $split_query[1];
+                    $this->Query_Params = $this->processParams(0, $query);
+                }
+            } else {
+                $uri = $strip_api;
+            }
+
+            $bomb_uri = explode("/", ltrim($uri, "/"));
+            if(count($bomb_uri) == 1){
+                $this->Controller = $bomb_uri[0];
+                $this->Action     = "index";
+                return;
+            }
+
+            if(count($bomb_uri) == 2){
+                $this->Controller = $bomb_uri[0];
+                $this->Action     = $bomb_uri[1];
+                return;
+            }
+
+            if(count($bomb_uri) >= 3){
+                $this->Controller = $bomb_uri[0];
+                $this->Action     = $bomb_uri[1];
+                $this->Uri_Params = $this->processParams(2, $bomb_uri);
+                return;
+            }
+        }
+    }
+
+    private function processParams($times_to_shift, $path_to_params){
+        if(is_string($path_to_params)){
+            parse_str($path_to_params,$params_array);
+        } else {
+            $params_array = $path_to_params;
+        }
+
+        for ($a = 0; $a <= $times_to_shift; $a++) {
+            $params_array = array_shift($params_array);
+        }
+
+        return $params_array;
+    }
+
+    public function build_uri($controller, $action, $params = null){
+        $uri = $this->BaseUri.$controller."/".$action;
+        if($params != null){
+            $uri.="/".$params;
+        }
+        return $uri;
+    }
+
+}

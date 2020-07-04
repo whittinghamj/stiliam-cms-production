@@ -1,0 +1,10 @@
+// search for a tv show
+https://api.themoviedb.org/3/search/tv?api_key=61bbced4721538ca21a3c3529cf44323&language=en-US&page=1&query=battlestar%20galactic%20(2003)&include_adult=false
+https://api.themoviedb.org/3/search/tv?api_key=61bbced4721538ca21a3c3529cf44323&language=en-US&page=1&query=24&include_adult=false
+
+// img full url
+https://image.tmdb.org/t/p/w500/poster_path from above api call
+
+// get season for tv show: "24" with id: "1973"
+https://api.themoviedb.org/3/tv/1973/season/1?api_key=61bbced4721538ca21a3c3529cf44323&language=en-US
+
