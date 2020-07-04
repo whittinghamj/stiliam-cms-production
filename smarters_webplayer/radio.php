@@ -1,522 +1,65 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+<?php
+/*
+ * @ PHP 5.6
+ * @ Decoder version : 1.0.0.1
+ */
+
+if (!isset($_POST["dateFullData"])) {
+    echo "    <!DOCTYPE html>\r\n    <html lang=\"en\">\r\n        <head>\r\n            <!-- google font link -->\r\n            <link href=\"https://fonts.googleapis.com/css?family=Open+Sans|Raleway\" rel=\"stylesheet\">\r\n            <!-- google font link -->\r\n            <link href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" rel=\"stylesheet\">\r\n            <link href=\"https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css\" rel=\"stylesheet\">\r\n            <script type=\"text/javascript\" src=\"js/jquery-1.11.2.min.js\"></script>\r\n        </head>\r\n        <body>\r\n            <form method=\"POST\" id=\"FormSubmit\" action=\"\">\r\n                <input type=\"hidden\" name=\"dateFullData\" id=\"InputFieldId\" value=\"\">\r\n            </form>\r\n            <script type=\"text/javascript\">\r\n                var currentTime = new Date();\r\n                var getDate = currentTime.getDate();\r\n                var getMonth = currentTime.getMonth() < 12 ? currentTime.getMonth() + 1 : 1;\r\n                var getFullYear = currentTime.getFullYear();\r\n                var getHours = currentTime.getHours();\r\n                var getMinutes = currentTime.getMinutes();\r\n                var getSeconds = currentTime.getSeconds();\r\n                var dateDatatosent = getDate + '-' + getMonth + '-' + getFullYear + ' ' + getHours + ':' + getMinutes + \":\" + getSeconds;\r\n                \$(\"#InputFieldId\").val(dateDatatosent);\r\n                var infputfieldvalue = \$(\"#InputFieldId\").val();\r\n                if (infputfieldvalue != '')\r\n                {\r\n                    \$(\"#FormSubmit\").submit();\r\n                }\r\n            </script>\r\n        </body>\r\n    </html>\r\n\r\n\r\n\r\n    ";
+} else {
+    include "includes/header.php";
+    if ($checkLicense["status"] != "Active") {
+        echo "<script>window.location.href = 'oops.php';</script>";
+        exit;
+    }
+    $CurrentPcDateTime = new DateTime($_POST["dateFullData"]);
+    $CurrentTime = $CurrentPcDateTime->getTimestamp();
+    if ($ShiftedTimeEPG != "0") {
+        $CurrentTime = strtotime($ShiftedTimeEPG . " hours", $CurrentTime);
+    }
+    $FinalCategoriesArray = array();
+    $FinalChannelsArray = array();
+    $FinalChannelsArrayWithEpg = array();
+    $GetallStreams = webtvpanel_CallApiRequest($hostURL . $bar . "player_api.php?username=" . $username . "&password=" . $password . "&action=get_live_streams");
+    $FirstCategoriesIDS = array();
+    if ($GetallStreams["result"] == "success") {
+        if (!empty($GetallStreams["data"])) {
+            foreach ($GetallStreams["data"] as $StreamsData) {
+                if ($StreamsData->stream_type == "radio_streams") {
+                    $FirstCategoriesIDS[$StreamsData->category_id] = "catregoryid";
+                }
+            }
+        }
+        sleep(1);
+    }
+    if (!empty($FirstCategoriesIDS)) {
+        $GetOnlyCateGories = webtvpanel_CallApiRequest($hostURL . $bar . "player_api.php?username=" . $username . "&password=" . $password . "&action=get_live_categories");
+        if ($GetOnlyCateGories["result"] == "success" && !empty($GetOnlyCateGories["data"])) {
+            $FinalCategoriesArray["result"] = "success";
+            $counter = 0;
+            foreach ($GetOnlyCateGories["data"] as $CatKey) {
+                if (array_key_exists($CatKey->category_id, $FirstCategoriesIDS)) {
+                    $FinalCategoriesArray["data"][$counter] = (object) array("category_id" => $CatKey->category_id, "category_name" => $CatKey->category_name, "parent_id" => "0");
+                    $counter++;
+                }
+            }
+        }
+    }
+    include "includes/sideNav.php";
+    echo "<script src='https://content.jwplatform.com/libraries/fgbTqCCh.js'></script>\r\n<script>\r\n function confirmparent(categoryID = '',onload = '')\r\n{\r\n  if(onload == 1)\r\n  {\r\n    \$('.main-fullContainer').addClass('hideOnLoad');\r\n    /*\$('.no-reultcontainer').removeClass('hideOnLoad');*/\r\n    \$('#fullLoader').addClass('hideOnLoad');\r\n    \$('.chanelLoader').hide();\r\n    \$('#fullLoader').addClass('hideOnLoad');\r\n    \$('.chanels').html(\"\")\r\n    \$('.liveEPG').html('').hide();\r\n    \$('#player-wrapper').addClass('noResult');\r\n    \$('#player-wrapper').html('');\r\n  }\r\n /* alert(\"Alert from function is \"+categoryID);*/\r\n  \$(\"#confirmpasswordbtn\").data('categoryID',categoryID);\r\n  \$('#confirmparentPopup').modal('show');\r\n\r\n  \r\n  \r\n}\r\n\r\n  var reconnectInt;\r\n  function getData(\$categoryID = '')\r\n{\r\n  if(reconnectInt !== null || reconnectInt !== undefined)\r\n          {\r\n            clearInterval(reconnectInt);\r\n          } \r\n  removeSearchSec();\r\n  \$('.chanels').html('');\r\n  \$('.chanelLoader').show().removeClass('hideOnLoad');\r\n   jQuery.ajax({\r\n            type:\"POST\",\r\n            url:\"includes/ajax-control.php\",\r\n            dataType:\"text\",\r\n            data:{\r\n            action:'getRadioStreamsFromID',\r\n            categoryID:\$categoryID,\r\n            hostURL: \"";
+    echo $XCStreamHostUrl . $bar;
+    echo "\"\r\n            },  \r\n              success:function(response2){ \r\n                \$getStreamsfromCategory = response2;\r\n                \$('.chanelLoader').hide();\r\n                \$('#fullLoader').addClass('hideOnLoad');\r\n                \r\n                \$('.chanels').html(\$getStreamsfromCategory);\r\n                var StreamId = \$('.Playclick').first().find('.streamId').val();\r\n                var StreamType = \$('.Playclick').first().find('.streamId').data('streamtype');\r\n                \$('.Playclick').first().addClass('playingChanel');\r\n                \$(document).find(\".rippler\").rippler({\r\n    effectClass      :  'rippler-effect'\r\n    ,effectSize      :  0      // Default size (width & height)\r\n    ,addElement      :  'div'   // e.g. 'svg'(feature)\r\n    ,duration        :  400\r\n  });\r\n\r\n                \$Videolink = \"";
+    echo $XCStreamHostUrl . $bar . "live/" . $username . "/" . $password;
+    echo "/\"+StreamId+\".m3u8\"\r\n                getVideoLinkAjax(\$Videolink);\r\n                getEPGdata(StreamId);\r\n              }\r\n            })\r\n}\r\n\r\n\r\nfunction getEPGdata(\$streamID = '')\r\n{\r\n  \$('.liveEPG').html('').hide();\r\n  \$('.epgloader').removeClass('hideOnLoad');\r\n\r\n  var CurrentTime = \$(\"#CurrentTime\").val();\r\n  jQuery.ajax({\r\n            type:\"POST\",\r\n            url:\"includes/epgdata.php\",\r\n            dataType:\"text\",\r\n            data:{\r\n            action:'GetEpgDataByStreamid',\r\n            StreamId:\$streamID,\r\n            CurrentTime:CurrentTime,\r\n            hostURL : \"";
+    echo $XCStreamHostUrl . $bar;
+    echo "\" \r\n            },  \r\n            success:function(response){\r\n              if(response != \"0\")\r\n              {\r\n\r\n                 \r\n\r\n               \$('.liveEPG').show().html(response);\r\n               \$('.epgloader').addClass('hideOnLoad');\r\n               if(\$(document).find('.NowPlayingActive').length >= 1)\r\n               {\r\n\r\n                var scroll = \$(document).find('.NowPlayingActive').offset().top;\r\n                var scrollHolder = \$(document).find('.liveEPG').offset().top;\r\n                scroll = scroll-scrollHolder;\r\n               \r\n                \$(document).find('.tab-pane.active').animate({\r\n                  scrollTop: (scroll-100)\r\n                },500); \r\n               \r\n               }\r\n               \r\n                \r\n                                  \r\n                                     \r\n              }\r\n            }\r\n          });\r\n}\r\n\r\nfunction getVideoLinkAjax(\$Videolink = \"\", FailCounter = \"\")\r\n{\r\n    //console.log(\$Videolink);\r\n    \$('.Loadicon').remove();\r\n    \$LiveVideoLink = \$Videolink;\r\n    if(reconnectInt !== null || reconnectInt !== undefined)\r\n          {\r\n            clearInterval(reconnectInt);\r\n          } \r\n    var player = jwplayer('player-wrapper');\r\n    // Set up the player with an HLS stream that includes timed metadata\r\n    player.setup({\r\n      \"file\": \$LiveVideoLink,\r\n      \"width\":\"100%\",\r\n      \"aspectratio\": \"16:9\"              \r\n    });\r\n    player.on('play',function(){\r\n      counter = 0;\r\n      clearInterval(reconnectInt);\r\n    })\r\n     player.on('error', function() {\r\n    /*var PlayerDIvSelector = \$('#player-wrapper');\r\n    PlayerDIvSelector.html('');\r\n    PlayerDIvSelector.attr('class', '');\r\n    PlayerDIvSelector.css('text-align', 'center');\r\n    PlayerDIvSelector.html('<img src=\"webtv/images/roundloader.gif\" alt=\"tv image\">');*/\r\n        var showText = 1;\r\n              var PlayerDIvSelector = \$('#player-wrapper');\r\n              PlayerDIvSelector.html('');\r\n              PlayerDIvSelector.attr('class', '');\r\n              PlayerDIvSelector.css('text-align', 'center');\r\n              PlayerDIvSelector.html('<div class=\"erroronplayer\"><span>Playback error, reconnects in 5s ('+showText+'/5)</span></div>');\r\n\r\n                \r\n                console.log('Stream connection lose reconnecting ' +showText +\" Time\");\r\n                console.log(\$(document).find('.jw-title-primary').text() + \$(document).find('.jw-title-secondary').text());\r\n            reconnectLoop(\$LiveVideoLink,FailCounter);\r\n            return false;\r\n      \r\n     \r\n    });\r\n}\r\n\r\nfunction reconnectLoop(Link,FailCounter)\r\n{\r\n\r\n\r\n  var counter = 0;\r\n      if(FailCounter == \"new\")\r\n            {\r\n              counter = 0;\r\n            } \r\n            console.log(counter);\r\n            \r\n            reconnectInt = setInterval(function()\r\n            {\r\n              counter++;\r\n              if(counter < 5)\r\n              {\r\n                var player = jwplayer(\"player-wrapper\").setup({\r\n                  \"file\": Link,\r\n                  \"width\": \"100%\",\r\n                  \"aspectratio\": \"16:9\"\r\n                });\r\n                player.on('play', function() {\r\n                  counter = 0;\r\n                  clearInterval(reconnectInt);\r\n                });\r\n                player.on('error', function(){\r\n                  var showText = Number(counter)+Number(1);\r\n                    var PlayerDIvSelector = \$('#player-wrapper');\r\n                    PlayerDIvSelector.html('');\r\n                    PlayerDIvSelector.attr('class', '');\r\n                    PlayerDIvSelector.css('text-align', 'center');\r\n                    PlayerDIvSelector.html('<div class=\"erroronplayer\"><span>Playback error, reconnects in 5s ('+showText+'/5)</span></div>');\r\n\r\n                      //counter = Number(counter)+Number(1);\r\n                      console.log('Stream connection lose reconnecting ' +counter +\" Time\");\r\n                      console.log(\$(document).find('.jw-title-primary').text() + \$(document).find('.jw-title-secondary').text());\r\n                      })\r\n              }\r\n              else\r\n              {\r\n                \r\n                  clearInterval(reconnectInt);\r\n                  counter = 0;\r\n                  var PlayerDIvSelector = \$('#player-wrapper');\r\n                  PlayerDIvSelector.html('');\r\n                  PlayerDIvSelector.attr('class', '');\r\n                  PlayerDIvSelector.css('text-align', 'center');\r\n                  PlayerDIvSelector.html('<div class=\"erroronplayer\"><span>Sorry, this video can not be played.<br> Please try again or pick another video.</span></div>');\r\n              }\r\n              \r\n            },5000);\r\n              \r\n}\r\n\$(document).ready(function(){\r\n  \$('#confirmpasswordbtn').click(function(){\r\n    \$(\"#parentPass\").removeClass('addredborder');    \r\n    var parentPass = \$(\"#parentPass\").val();\r\n    var categoryid = \$(this).data('categoryID');\r\n    if(parentPass == \"\")\r\n    {\r\n      \$(\"#parentPass\").addClass('addredborder');\r\n    }\r\n    else\r\n    {\r\n      \$('#checkingprocess2').removeClass('hideOnLoad');\r\n      jQuery.ajax({\r\n      type:\"POST\",\r\n      url:\"includes/ajax-control.php\",\r\n      dataType:\"text\",\r\n      data:{\r\n        action:'confirm_parentpassword',\r\n        parentPass:parentPass\r\n      },  \r\n        success:function(response2){ \r\n          \$('#checkingprocess2').addClass('hideOnLoad');\r\n           if(response2 != 0)\r\n           {\r\n              \$('#parentPass').val('');\r\n              \$('#confirmparentPopup').modal('hide');   \r\n               getData(categoryid);        \r\n           }\r\n           else\r\n           {\r\n              swal({\r\n                  title: 'Error!',\r\n                  text: 'Invalid Password !!!',\r\n                  icon: 'warning'\r\n                 });\r\n           }             \r\n        }\r\n      });\r\n    }\r\n      \r\n  });\r\n\r\n\r\n\r\n  \$('#SearchData').keypress(function (e) {\r\n   var key = e.which;\r\n   if(key == 13)  // the enter key code\r\n    {\r\n        callSearchFun(); \r\n    }\r\n  });  \r\n\r\n  var omLoadCategorylength = \$(document).find('.onloadCallCategory').length;\r\n  if(omLoadCategorylength != 0)\r\n  {\r\n    var omLoadCategoryID = \$(document).find('.onloadCallCategory').data('categoryid');\r\n    var parentControlData = \$(document).find('.onloadCallCategory').data('pcon');\r\n    if(parentControlData == 1)\r\n    {\r\n        confirmparent(omLoadCategoryID,1);\r\n    }\r\n    else\r\n    {\r\n      getData(omLoadCategoryID);\r\n    }\r\n  }\r\n  else\r\n  {\r\n    \$('.main-fullContainer').addClass('hideOnLoad');\r\n    \$('.no-reultcontainer').removeClass('hideOnLoad');\r\n    \$('#fullLoader').addClass('hideOnLoad');\r\n    \$('.chanelLoader').hide();\r\n    \$('#fullLoader').addClass('hideOnLoad');\r\n    \$('.chanels').html(\"\")\r\n    \$('.liveEPG').html('').hide();\r\n    \$('#player-wrapper').addClass('noResult');\r\n    \$('#player-wrapper').html('')\r\n  }\r\n    \r\n  \$( document ).on(\"click\", \".Playclick\", function(){\r\n        \$('.epgloader').removeClass('hideOnLoad');\r\n        \$('liveEPG').html('');\r\n        var StreamId = \$(this).find('.streamId').val();\r\n        var StreamType = \$(this).find('.streamId').data('streamtype');\r\n        \$('.Playclick').removeClass('playingChanel');\r\n        \$(this).addClass('playingChanel');\r\n\r\n        \$Videolink = \"";
+    echo $XCStreamHostUrl . $bar . "live/" . $username . "/" . $password;
+    echo "/\"+StreamId+\".m3u8\"\r\n        getVideoLinkAjax(\$Videolink);  \r\n        getEPGdata(StreamId);\r\n         var scroll1 = \$(document).find('.video-player1').offset().top;\r\n                \$('body, html').animate({\r\n                  scrollTop: (scroll1-100)\r\n                },500); \r\n     });\r\n\r\n  /*jwplayer(\"player-wrapper\").setup({\r\n        //flashplayer: \"player.swf\",\r\n        file: \"\",\r\n        \r\n    });*/\r\n\r\n     \$( document ).on(\"click\", \"#SearchBtn\", function(){\r\n             callSearchFun();\r\n        });\r\n\r\n     \$( document ).on(\"click\", \".clearSearch\", function(){\r\n            removeSearchSec();\r\n        });\r\n});\r\n\r\n\r\nfunction callSearchFun()\r\n{\r\n  \$('#noResultFound').remove();\r\n   var SearchData = \$(\"#SearchData\").val();   \r\n   if(SearchData != \"\")\r\n   {\r\n      \$('.streamList').addClass('hideOnLoad');\r\n      var moive_namesearch = \$('.serch_key');\r\n      filter = SearchData.toUpperCase();\r\n      CustomIndex = 0;\r\n      moive_namesearch.each(function( index ) {\r\n        if (\$( this ).val().toUpperCase().indexOf(filter) > -1) {\r\n          \$(\".\"+\$(this).data('parentliclass')).removeClass('hideOnLoad');\r\n          CustomIndex = 1;\r\n        }\r\n      });  \r\n      if(CustomIndex == 0)\r\n      {\r\n          \$('.channels-ul').append('<li id=\"noResultFound\">No Result Found!!')\r\n      }\r\n      \$('#search').removeClass('open');\r\n      \$('.clearSearch').removeClass('hideOnLoad');\r\n\r\n   }\r\n   else\r\n   {\r\n      swal('Enter keyword for search.',{button: false});\r\n      setTimeout(function(){swal.close();},2000);\r\n   }\r\n}\r\n\r\n\r\nfunction removeSearchSec()\r\n{\r\n   \$('#SearchData').val(''); \r\n   \$('#noResultFound').remove();\r\n   \$('.clearSearch').addClass('hideOnLoad'); \r\n   \$('.streamList').removeClass('hideOnLoad'); \r\n}\r\n\r\n  </script>\r\n\r\n\r\n<style type=\"text/css\">\r\n  .PlayerLoader .erroronplayer {\r\n      position: relative;\r\n      top: 150px;\r\n  }\r\n   .addredborder\r\n  {\r\n    border:1px solid red !important;\r\n  }\r\n\r\n  .modal-backdrop {\r\n      z-index: 1040 !important;\r\n  }\r\n  .modal-dialog {\r\n      z-index: 1100 !important;\r\n  }\r\n\r\n  .in {\r\n    background: rgba(0, 0, 0, 0.95);\r\n    }\r\n\r\n    button#UpdateParentPassword {\r\n        position: relative;\r\n        top: 18px;\r\n    }\r\n    .commoncs2, .commoncs2:focus, .commoncs2:active\r\n    {\r\n        background: transparent;\r\n        color: #000 !important;\r\n        padding: 0;\r\n        box-shadow: none;\r\n        outline: none;\r\n        border: 0;\r\n        border-bottom: 1px solid #000;\r\n        border-radius: 0;\r\n    }\r\n    .commoncs2::-webkit-input-placeholder {\r\n        color: #000 !important;\r\n      }\r\n</style>\r\n\r\n<div class=\"modal fade\" id=\"confirmparentPopup\" role=\"dialog\" data-backdrop=\"static\" data-keyboard=\"false\">\r\n    <div class=\"modal-dialog\">\r\n    \r\n      <!-- Modal content-->\r\n      <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n          <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\r\n          <h4 class=\"modal-title\">Confirm Parent Password</h4>\r\n        </div>\r\n        <div class=\"modal-body\">\r\n          <input type=\"password\" id=\"parentPass\" class=\"form-control commoncs2\" placeholder=\"Enter Password\" value=\"\"  >\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n          <button type=\"button\" id=\"confirmpasswordbtn\" class=\"btn btn-primary\">Confirm <i class=\"fa fa-spin fa-spinner hideOnLoad\" id=\"checkingprocess2\"></i></button>\r\n          <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\r\n        </div>\r\n      </div>\r\n      \r\n    </div>\r\n  </div>\r\n<div class=\"container-fluid no-reultcontainer hideOnLoad\">\r\n  <h2 style=\"margin-top: 30px;\">Radio Channels</h2>\r\n  <h2 style=\"text-align: center;margin-top: 40px;\">No Result Found!</h2>\r\n</div>\r\n<div class=\"container-fluid main-fullContainer\">\r\n  <center id=\"fullLoader\"><img src=\"images/roundloader.gif\"><p class=\"text-center\">LOADING DATA</p></center>\r\n<input type=\"hidden\" id=\"CurrentTime\" value=\"";
+    echo $CurrentTime;
+    echo "\" data-temp=\"";
+    echo date("Y M d h:i A", $CurrentTime);
+    echo "\">\r\n        <!-- Live Channels -->\r\n        <div class=\"col-sm-5\">\r\n          <h2 style=\"margin-top: 30px;\">Radio Channels <span class=\"clearSearch hideOnLoad rippler rippler-default\">Clear Search</span></h2>\r\n\r\n          <div class=\"channel-list\">\r\n            <div class=\"chanelLoader hideOnLoad\">\r\n              <center><img src=\"images/roundloader.gif\"><p class=\"text-center\">LOADING CHANNELS</p></center>\r\n            </div>\r\n            <ul class=\"free-wall chanels channels-ul\">\r\n            \r\n            </ul>\r\n          </div>\r\n        </div>\r\n        <!-- /Live Channels -->\r\n        <!-- Video Player -->\r\n        <div class=\"col-sm-7\">\r\n          <div class=\"video-player1\">\r\n            <div id=\"player-wrapper\" style=\"text-align: center;\">\r\n\r\n                        <center class=\"PlayerLoader\">\r\n                             <div class=\"Loadicon\" role=\"button\" tabindex=\"0\" aria-label=\"Loading\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"jw-svg-icon jw-svg-icon-buffer\" viewBox=\"0 0 240 240\" focusable=\"false\"><path id=\"PloaderIcon\" d=\"M120,186.667a66.667,66.667,0,0,1,0-133.333V40a80,80,0,1,0,80,80H186.667A66.846,66.846,0,0,1,120,186.667Z\"></path></svg></div> \r\n                             <!-- <img src=\"images/loader_new.gif\"> -->\r\n                        </center> \r\n\r\n                    </div>\r\n                \r\n                      </div>\r\n                    </div>\r\n\r\n                    <!-- EPG -->\r\n        \r\n        <div class=\"col-sm-7\">\r\n          <div class=\"playlist\">\r\n            <div class=\"epgloader hideOnLoad\">\r\n              <center><img src=\"images/roundloader.gif\"><p class=\"text-center\">LOADING EPG</p></center>\r\n            </div>\r\n            <div class=\"liveEPG\">\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <!-- /EPG -->\r\n        \r\n        <div class=\"clearfix\"></div>\r\n        <!-- List of Channels -->\r\n        <div class=\"col-sm-5 hide\">\r\n          <h2 style=\"margin-top: 30px;\">TV/All/By Numbers</h2>\r\n          <div class=\"channel-list\">\r\n            <ul class=\"free-wall\">\r\n              <li id=\"video1\">\r\n                <span class=\"number\">1</span>\r\n                <i class=\"fa fa-television\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>\r\n                <label>Mega</label>\r\n              </li>\r\n\r\n              <li id=\"video2\">\r\n                <span class=\"number\">2</span>\r\n                <i class=\"fa fa-television\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>\r\n                <label>A1</label>\r\n              </li>\r\n\r\n              <li id=\"video3\">\r\n                <span class=\"number\">3</span>\r\n                <i class=\"fa fa-television\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>\r\n                <label>Channel 1</label>\r\n              </li>\r\n\r\n              <li id=\"video4\">\r\n                <span class=\"number\">4</span>\r\n                <i class=\"fa fa-television\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>\r\n                <label>Global Channel</label>\r\n              </li>\r\n\r\n              <li>\r\n                <span class=\"number\">5</span>\r\n                <i class=\"fa fa-television\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>\r\n                <label>Channel Mega</label>\r\n              </li>\r\n\r\n              <li>\r\n                <span class=\"number\">6</span>\r\n                <i class=\"fa fa-television\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>\r\n                <label>Super Stop</label>\r\n              </li>\r\n\r\n              <li>\r\n                <span class=\"number\">7</span>\r\n                <i class=\"fa fa-television\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>\r\n                <label>Example Channel</label>\r\n              </li>\r\n\r\n              <li>\r\n                <span class=\"number\">8</span>\r\n                <i class=\"fa fa-television\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>\r\n                <label>A1</label>\r\n              </li>\r\n\r\n              <li>\r\n                <span class=\"number\">9</span>\r\n                <i class=\"fa fa-television\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>\r\n                <label>Mega Channel</label>\r\n              </li>\r\n\r\n              <li>\r\n                <span class=\"number\">10</span>\r\n                <i class=\"fa fa-television\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>\r\n                <label>Custom Channel</label>\r\n              </li>\r\n\r\n              <li>\r\n                <span class=\"number\">11</span>\r\n                <i class=\"fa fa-television\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>\r\n                <label>Tune Up</label>\r\n              </li>\r\n\r\n              <li>\r\n                <span class=\"number\">12</span>\r\n                <i class=\"fa fa-television\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                <i class=\"fa fa-repeat\" aria-hidden=\"true\"></i>\r\n                <label>One Channel</label>\r\n              </li>\r\n            </ul>\r\n          </div>\r\n        </div>\r\n        <!-- /List of Channels -->\r\n        \r\n\r\n        \r\n                </div>\r\n      ";
+    include "includes/footer.php";
+}
+
 ?>
-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
-kSwhnA0=

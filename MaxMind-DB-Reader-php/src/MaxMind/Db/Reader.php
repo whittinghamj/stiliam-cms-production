@@ -1,187 +1,322 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+<?php
+
+namespace MaxMind\Db;
+
+use BadMethodCallException;
+use Exception;
+use InvalidArgumentException;
+use MaxMind\Db\Reader\Decoder;
+use MaxMind\Db\Reader\InvalidDatabaseException;
+use MaxMind\Db\Reader\Metadata;
+use MaxMind\Db\Reader\Util;
+use UnexpectedValueException;
+
+/**
+ * Instances of this class provide a reader for the MaxMind DB format. IP
+ * addresses can be looked up using the get method.
+ */
+class Reader
+{
+    private static $DATA_SECTION_SEPARATOR_SIZE = 16;
+    private static $METADATA_START_MARKER = "\xAB\xCD\xEFMaxMind.com";
+    private static $METADATA_START_MARKER_LENGTH = 14;
+    private static $METADATA_MAX_SIZE = 131072; // 128 * 1024 = 128KiB
+
+    private $decoder;
+    private $fileHandle;
+    private $fileSize;
+    private $ipV4Start;
+    private $metadata;
+
+    /**
+     * Constructs a Reader for the MaxMind DB format. The file passed to it must
+     * be a valid MaxMind DB file such as a GeoIp2 database file.
+     *
+     * @param string $database
+     *                         the MaxMind DB file to use
+     *
+     * @throws InvalidArgumentException                    for invalid database path or unknown arguments
+     * @throws \MaxMind\Db\Reader\InvalidDatabaseException
+     *                                                     if the database is invalid or there is an error reading
+     *                                                     from it
+     */
+    public function __construct($database)
+    {
+        if (\func_num_args() !== 1) {
+            throw new InvalidArgumentException(
+                'The constructor takes exactly one argument.'
+            );
+        }
+
+        $this->fileHandle = @fopen($database, 'rb');
+        if ($this->fileHandle === false) {
+            throw new InvalidArgumentException(
+                "The file \"$database\" does not exist or is not readable."
+            );
+        }
+        $this->fileSize = @filesize($database);
+        if ($this->fileSize === false) {
+            throw new UnexpectedValueException(
+                "Error determining the size of \"$database\"."
+            );
+        }
+
+        $start = $this->findMetadataStart($database);
+        $metadataDecoder = new Decoder($this->fileHandle, $start);
+        list($metadataArray) = $metadataDecoder->decode($start);
+        $this->metadata = new Metadata($metadataArray);
+        $this->decoder = new Decoder(
+            $this->fileHandle,
+            $this->metadata->searchTreeSize + self::$DATA_SECTION_SEPARATOR_SIZE
+        );
+        $this->ipV4Start = $this->ipV4StartNode();
+    }
+
+    /**
+     * Retrieves the record for the IP address.
+     *
+     * @param string $ipAddress
+     *                          the IP address to look up
+     *
+     * @throws BadMethodCallException   if this method is called on a closed database
+     * @throws InvalidArgumentException if something other than a single IP address is passed to the method
+     * @throws InvalidDatabaseException
+     *                                  if the database is invalid or there is an error reading
+     *                                  from it
+     *
+     * @return mixed the record for the IP address
+     */
+    public function get($ipAddress)
+    {
+        if (\func_num_args() !== 1) {
+            throw new InvalidArgumentException(
+                'Method takes exactly one argument.'
+            );
+        }
+        list($record) = $this->getWithPrefixLen($ipAddress);
+
+        return $record;
+    }
+
+    /**
+     * Retrieves the record for the IP address and its associated network prefix length.
+     *
+     * @param string $ipAddress
+     *                          the IP address to look up
+     *
+     * @throws BadMethodCallException   if this method is called on a closed database
+     * @throws InvalidArgumentException if something other than a single IP address is passed to the method
+     * @throws InvalidDatabaseException
+     *                                  if the database is invalid or there is an error reading
+     *                                  from it
+     *
+     * @return array an array where the first element is the record and the
+     *               second the network prefix length for the record
+     */
+    public function getWithPrefixLen($ipAddress)
+    {
+        if (\func_num_args() !== 1) {
+            throw new InvalidArgumentException(
+                'Method takes exactly one argument.'
+            );
+        }
+
+        if (!\is_resource($this->fileHandle)) {
+            throw new BadMethodCallException(
+                'Attempt to read from a closed MaxMind DB.'
+            );
+        }
+
+        if (!filter_var($ipAddress, FILTER_VALIDATE_IP)) {
+            throw new InvalidArgumentException(
+                "The value \"$ipAddress\" is not a valid IP address."
+            );
+        }
+
+        list($pointer, $prefixLen) = $this->findAddressInTree($ipAddress);
+        if ($pointer === 0) {
+            return [null, $prefixLen];
+        }
+
+        return [$this->resolveDataPointer($pointer), $prefixLen];
+    }
+
+    private function findAddressInTree($ipAddress)
+    {
+        $rawAddress = unpack('C*', inet_pton($ipAddress));
+
+        $bitCount = \count($rawAddress) * 8;
+
+        // The first node of the tree is always node 0, at the beginning of the
+        // value
+        $node = 0;
+
+        $metadata = $this->metadata;
+
+        // Check if we are looking up an IPv4 address in an IPv6 tree. If this
+        // is the case, we can skip over the first 96 nodes.
+        if ($metadata->ipVersion === 6) {
+            if ($bitCount === 32) {
+                $node = $this->ipV4Start;
+            }
+        } elseif ($metadata->ipVersion === 4 && $bitCount === 128) {
+            throw new InvalidArgumentException(
+                "Error looking up $ipAddress. You attempted to look up an"
+                . ' IPv6 address in an IPv4-only database.'
+            );
+        }
+
+        $nodeCount = $metadata->nodeCount;
+
+        for ($i = 0; $i < $bitCount && $node < $nodeCount; ++$i) {
+            $tempBit = 0xFF & $rawAddress[($i >> 3) + 1];
+            $bit = 1 & ($tempBit >> 7 - ($i % 8));
+
+            $node = $this->readNode($node, $bit);
+        }
+        if ($node === $nodeCount) {
+            // Record is empty
+            return [0, $i];
+        } elseif ($node > $nodeCount) {
+            // Record is a data pointer
+            return [$node, $i];
+        }
+        throw new InvalidDatabaseException('Something bad happened');
+    }
+
+    private function ipV4StartNode()
+    {
+        // If we have an IPv4 database, the start node is the first node
+        if ($this->metadata->ipVersion === 4) {
+            return 0;
+        }
+
+        $node = 0;
+
+        for ($i = 0; $i < 96 && $node < $this->metadata->nodeCount; ++$i) {
+            $node = $this->readNode($node, 0);
+        }
+
+        return $node;
+    }
+
+    private function readNode($nodeNumber, $index)
+    {
+        $baseOffset = $nodeNumber * $this->metadata->nodeByteSize;
+
+        switch ($this->metadata->recordSize) {
+            case 24:
+                $bytes = Util::read($this->fileHandle, $baseOffset + $index * 3, 3);
+                list(, $node) = unpack('N', "\x00" . $bytes);
+
+                return $node;
+            case 28:
+                $bytes = Util::read($this->fileHandle, $baseOffset + 3 * $index, 4);
+                if ($index === 0) {
+                    $middle = (0xF0 & \ord($bytes[3])) >> 4;
+                } else {
+                    $middle = 0x0F & \ord($bytes[0]);
+                }
+                list(, $node) = unpack('N', \chr($middle) . substr($bytes, $index, 3));
+
+                return $node;
+            case 32:
+                $bytes = Util::read($this->fileHandle, $baseOffset + $index * 4, 4);
+                list(, $node) = unpack('N', $bytes);
+
+                return $node;
+            default:
+                throw new InvalidDatabaseException(
+                    'Unknown record size: '
+                    . $this->metadata->recordSize
+                );
+        }
+    }
+
+    private function resolveDataPointer($pointer)
+    {
+        $resolved = $pointer - $this->metadata->nodeCount
+            + $this->metadata->searchTreeSize;
+        if ($resolved >= $this->fileSize) {
+            throw new InvalidDatabaseException(
+                "The MaxMind DB file's search tree is corrupt"
+            );
+        }
+
+        list($data) = $this->decoder->decode($resolved);
+
+        return $data;
+    }
+
+    /*
+     * This is an extremely naive but reasonably readable implementation. There
+     * are much faster algorithms (e.g., Boyer-Moore) for this if speed is ever
+     * an issue, but I suspect it won't be.
+     */
+    private function findMetadataStart($filename)
+    {
+        $handle = $this->fileHandle;
+        $fstat = fstat($handle);
+        $fileSize = $fstat['size'];
+        $marker = self::$METADATA_START_MARKER;
+        $markerLength = self::$METADATA_START_MARKER_LENGTH;
+
+        $minStart = $fileSize - min(self::$METADATA_MAX_SIZE, $fileSize);
+
+        for ($offset = $fileSize - $markerLength; $offset >= $minStart; --$offset) {
+            if (fseek($handle, $offset) !== 0) {
+                break;
+            }
+
+            $value = fread($handle, $markerLength);
+            if ($value === $marker) {
+                return $offset + $markerLength;
+            }
+        }
+        throw new InvalidDatabaseException(
+            "Error opening database file ($filename). " .
+            'Is this a valid MaxMind DB file?'
+        );
+    }
+
+    /**
+     * @throws InvalidArgumentException if arguments are passed to the method
+     * @throws BadMethodCallException   if the database has been closed
+     *
+     * @return Metadata object for the database
+     */
+    public function metadata()
+    {
+        if (\func_num_args()) {
+            throw new InvalidArgumentException(
+                'Method takes no arguments.'
+            );
+        }
+
+        // Not technically required, but this makes it consistent with
+        // C extension and it allows us to change our implementation later.
+        if (!\is_resource($this->fileHandle)) {
+            throw new BadMethodCallException(
+                'Attempt to read from a closed MaxMind DB.'
+            );
+        }
+
+        return $this->metadata;
+    }
+
+    /**
+     * Closes the MaxMind DB and returns resources to the system.
+     *
+     * @throws Exception
+     *                   if an I/O error occurs
+     */
+    public function close()
+    {
+        if (!\is_resource($this->fileHandle)) {
+            throw new BadMethodCallException(
+                'Attempt to close a closed MaxMind DB.'
+            );
+        }
+        fclose($this->fileHandle);
+    }
+}

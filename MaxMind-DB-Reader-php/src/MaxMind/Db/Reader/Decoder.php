@@ -1,239 +1,356 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
-HsZmRZimsHTsAcAiXsNypG==
+<?php
+
+namespace MaxMind\Db\Reader;
+
+// @codingStandardsIgnoreLine
+use RuntimeException;
+
+/**
+ * @ignore
+ *
+ * We subtract 1 from the log to protect against precision loss.
+ */
+\define(__NAMESPACE__ . '\_MM_MAX_INT_BYTES', (log(PHP_INT_MAX, 2) - 1) / 8);
+
+class Decoder
+{
+    private $fileStream;
+    private $pointerBase;
+    private $pointerBaseByteSize;
+    // This is only used for unit testing
+    private $pointerTestHack;
+    private $switchByteOrder;
+
+    /** @ignore */
+    const _EXTENDED = 0;
+    /** @ignore */
+    const _POINTER = 1;
+    /** @ignore */
+    const _UTF8_STRING = 2;
+    /** @ignore */
+    const _DOUBLE = 3;
+    /** @ignore */
+    const _BYTES = 4;
+    /** @ignore */
+    const _UINT16 = 5;
+    /** @ignore */
+    const _UINT32 = 6;
+    /** @ignore */
+    const _MAP = 7;
+    /** @ignore */
+    const _INT32 = 8;
+    /** @ignore */
+    const _UINT64 = 9;
+    /** @ignore */
+    const _UINT128 = 10;
+    /** @ignore */
+    const _ARRAY = 11;
+    /** @ignore */
+    const _CONTAINER = 12;
+    /** @ignore */
+    const _END_MARKER = 13;
+    /** @ignore */
+    const _BOOLEAN = 14;
+    /** @ignore */
+    const _FLOAT = 15;
+
+    public function __construct(
+        $fileStream,
+        $pointerBase = 0,
+        $pointerTestHack = false
+    ) {
+        $this->fileStream = $fileStream;
+        $this->pointerBase = $pointerBase;
+
+        $this->pointerBaseByteSize = $pointerBase > 0 ? log($pointerBase, 2) / 8 : 0;
+        $this->pointerTestHack = $pointerTestHack;
+
+        $this->switchByteOrder = $this->isPlatformLittleEndian();
+    }
+
+    public function decode($offset)
+    {
+        $ctrlByte = \ord(Util::read($this->fileStream, $offset, 1));
+        ++$offset;
+
+        $type = $ctrlByte >> 5;
+
+        // Pointers are a special case, we don't read the next $size bytes, we
+        // use the size to determine the length of the pointer and then follow
+        // it.
+        if ($type === self::_POINTER) {
+            list($pointer, $offset) = $this->decodePointer($ctrlByte, $offset);
+
+            // for unit testing
+            if ($this->pointerTestHack) {
+                return [$pointer];
+            }
+
+            list($result) = $this->decode($pointer);
+
+            return [$result, $offset];
+        }
+
+        if ($type === self::_EXTENDED) {
+            $nextByte = \ord(Util::read($this->fileStream, $offset, 1));
+
+            $type = $nextByte + 7;
+
+            if ($type < 8) {
+                throw new InvalidDatabaseException(
+                    'Something went horribly wrong in the decoder. An extended type '
+                    . 'resolved to a type number < 8 ('
+                    . $type
+                    . ')'
+                );
+            }
+
+            ++$offset;
+        }
+
+        list($size, $offset) = $this->sizeFromCtrlByte($ctrlByte, $offset);
+
+        return $this->decodeByType($type, $offset, $size);
+    }
+
+    private function decodeByType($type, $offset, $size)
+    {
+        switch ($type) {
+            case self::_MAP:
+                return $this->decodeMap($size, $offset);
+            case self::_ARRAY:
+                return $this->decodeArray($size, $offset);
+            case self::_BOOLEAN:
+                return [$this->decodeBoolean($size), $offset];
+        }
+
+        $newOffset = $offset + $size;
+        $bytes = Util::read($this->fileStream, $offset, $size);
+        switch ($type) {
+            case self::_BYTES:
+            case self::_UTF8_STRING:
+                return [$bytes, $newOffset];
+            case self::_DOUBLE:
+                $this->verifySize(8, $size);
+
+                return [$this->decodeDouble($bytes), $newOffset];
+            case self::_FLOAT:
+                $this->verifySize(4, $size);
+
+                return [$this->decodeFloat($bytes), $newOffset];
+            case self::_INT32:
+                return [$this->decodeInt32($bytes, $size), $newOffset];
+            case self::_UINT16:
+            case self::_UINT32:
+            case self::_UINT64:
+            case self::_UINT128:
+                return [$this->decodeUint($bytes, $size), $newOffset];
+            default:
+                throw new InvalidDatabaseException(
+                    'Unknown or unexpected type: ' . $type
+                );
+        }
+    }
+
+    private function verifySize($expected, $actual)
+    {
+        if ($expected !== $actual) {
+            throw new InvalidDatabaseException(
+                "The MaxMind DB file's data section contains bad data (unknown data type or corrupt data)"
+            );
+        }
+    }
+
+    private function decodeArray($size, $offset)
+    {
+        $array = [];
+
+        for ($i = 0; $i < $size; ++$i) {
+            list($value, $offset) = $this->decode($offset);
+            array_push($array, $value);
+        }
+
+        return [$array, $offset];
+    }
+
+    private function decodeBoolean($size)
+    {
+        return $size === 0 ? false : true;
+    }
+
+    private function decodeDouble($bits)
+    {
+        // This assumes IEEE 754 doubles, but most (all?) modern platforms
+        // use them.
+        //
+        // We are not using the "E" format as that was only added in
+        // 7.0.15 and 7.1.1. As such, we must switch byte order on
+        // little endian machines.
+        list(, $double) = unpack('d', $this->maybeSwitchByteOrder($bits));
+
+        return $double;
+    }
+
+    private function decodeFloat($bits)
+    {
+        // This assumes IEEE 754 floats, but most (all?) modern platforms
+        // use them.
+        //
+        // We are not using the "G" format as that was only added in
+        // 7.0.15 and 7.1.1. As such, we must switch byte order on
+        // little endian machines.
+        list(, $float) = unpack('f', $this->maybeSwitchByteOrder($bits));
+
+        return $float;
+    }
+
+    private function decodeInt32($bytes, $size)
+    {
+        switch ($size) {
+            case 0:
+                return 0;
+            case 1:
+            case 2:
+            case 3:
+                $bytes = str_pad($bytes, 4, "\x00", STR_PAD_LEFT);
+                break;
+            case 4:
+                break;
+            default:
+                throw new InvalidDatabaseException(
+                    "The MaxMind DB file's data section contains bad data (unknown data type or corrupt data)"
+                );
+        }
+
+        list(, $int) = unpack('l', $this->maybeSwitchByteOrder($bytes));
+
+        return $int;
+    }
+
+    private function decodeMap($size, $offset)
+    {
+        $map = [];
+
+        for ($i = 0; $i < $size; ++$i) {
+            list($key, $offset) = $this->decode($offset);
+            list($value, $offset) = $this->decode($offset);
+            $map[$key] = $value;
+        }
+
+        return [$map, $offset];
+    }
+
+    private function decodePointer($ctrlByte, $offset)
+    {
+        $pointerSize = (($ctrlByte >> 3) & 0x3) + 1;
+
+        $buffer = Util::read($this->fileStream, $offset, $pointerSize);
+        $offset = $offset + $pointerSize;
+
+        switch ($pointerSize) {
+            case 1:
+                $packed = \chr($ctrlByte & 0x7) . $buffer;
+                list(, $pointer) = unpack('n', $packed);
+                $pointer += $this->pointerBase;
+                break;
+            case 2:
+                $packed = "\x00" . \chr($ctrlByte & 0x7) . $buffer;
+                list(, $pointer) = unpack('N', $packed);
+                $pointer += $this->pointerBase + 2048;
+                break;
+            case 3:
+                $packed = \chr($ctrlByte & 0x7) . $buffer;
+
+                // It is safe to use 'N' here, even on 32 bit machines as the
+                // first bit is 0.
+                list(, $pointer) = unpack('N', $packed);
+                $pointer += $this->pointerBase + 526336;
+                break;
+            case 4:
+                // We cannot use unpack here as we might overflow on 32 bit
+                // machines
+                $pointerOffset = $this->decodeUint($buffer, $pointerSize);
+
+                $byteLength = $pointerSize + $this->pointerBaseByteSize;
+
+                if ($byteLength <= _MM_MAX_INT_BYTES) {
+                    $pointer = $pointerOffset + $this->pointerBase;
+                } elseif (\extension_loaded('gmp')) {
+                    $pointer = gmp_strval(gmp_add($pointerOffset, $this->pointerBase));
+                } elseif (\extension_loaded('bcmath')) {
+                    $pointer = bcadd($pointerOffset, $this->pointerBase);
+                } else {
+                    throw new RuntimeException(
+                        'The gmp or bcmath extension must be installed to read this database.'
+                    );
+                }
+        }
+
+        return [$pointer, $offset];
+    }
+
+    private function decodeUint($bytes, $byteLength)
+    {
+        if ($byteLength === 0) {
+            return 0;
+        }
+
+        $integer = 0;
+
+        for ($i = 0; $i < $byteLength; ++$i) {
+            $part = \ord($bytes[$i]);
+
+            // We only use gmp or bcmath if the final value is too big
+            if ($byteLength <= _MM_MAX_INT_BYTES) {
+                $integer = ($integer << 8) + $part;
+            } elseif (\extension_loaded('gmp')) {
+                $integer = gmp_strval(gmp_add(gmp_mul($integer, 256), $part));
+            } elseif (\extension_loaded('bcmath')) {
+                $integer = bcadd(bcmul($integer, 256), $part);
+            } else {
+                throw new RuntimeException(
+                    'The gmp or bcmath extension must be installed to read this database.'
+                );
+            }
+        }
+
+        return $integer;
+    }
+
+    private function sizeFromCtrlByte($ctrlByte, $offset)
+    {
+        $size = $ctrlByte & 0x1f;
+
+        if ($size < 29) {
+            return [$size, $offset];
+        }
+
+        $bytesToRead = $size - 28;
+        $bytes = Util::read($this->fileStream, $offset, $bytesToRead);
+
+        if ($size === 29) {
+            $size = 29 + \ord($bytes);
+        } elseif ($size === 30) {
+            list(, $adjust) = unpack('n', $bytes);
+            $size = 285 + $adjust;
+        } elseif ($size > 30) {
+            list(, $adjust) = unpack('N', "\x00" . $bytes);
+            $size = $adjust + 65821;
+        }
+
+        return [$size, $offset + $bytesToRead];
+    }
+
+    private function maybeSwitchByteOrder($bytes)
+    {
+        return $this->switchByteOrder ? strrev($bytes) : $bytes;
+    }
+
+    private function isPlatformLittleEndian()
+    {
+        $testint = 0x00FF;
+        $packed = pack('S', $testint);
+
+        return $testint === current(unpack('v', $packed));
+    }
+}

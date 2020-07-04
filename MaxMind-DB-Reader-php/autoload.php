@@ -1,29 +1,45 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+<?php
+
+/**
+ * PSR-4 autoloader implementation for the MaxMind\DB namespace.
+ * First we define the 'mmdb_autoload' function, and then we register
+ * it with 'spl_autoload_register' so that PHP knows to use it.
+ *
+ * @param mixed $class
+ */
+
+/**
+ * Automatically include the file that defines <code>class</code>.
+ *
+ * @param string $class
+ *                      the name of the class to load
+ */
+function mmdb_autoload($class)
+{
+    /*
+    * A project-specific mapping between the namespaces and where
+    * they're located. By convention, we include the trailing
+    * slashes. The one-element array here simply makes things easy
+    * to extend in the future if (for example) the test classes
+    * begin to use one another.
+    */
+    $namespace_map = ['MaxMind\\Db\\' => __DIR__ . '/src/MaxMind/Db/'];
+
+    foreach ($namespace_map as $prefix => $dir) {
+        /* First swap out the namespace prefix with a directory... */
+        $path = str_replace($prefix, $dir, $class);
+
+        /* replace the namespace separator with a directory separator... */
+        $path = str_replace('\\', '/', $path);
+
+        /* and finally, add the PHP file extension to the result. */
+        $path = $path . '.php';
+
+        /* $path should now contain the path to a PHP file defining $class */
+        if (file_exists($path)) {
+            include $path;
+        }
+    }
+}
+
+spl_autoload_register('mmdb_autoload');

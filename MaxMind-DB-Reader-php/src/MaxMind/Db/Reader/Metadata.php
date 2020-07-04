@@ -1,35 +1,88 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
-g6a3ncS7bLEqSwMR27/t
+<?php
+
+namespace MaxMind\Db\Reader;
+
+/**
+ * This class provides the metadata for the MaxMind DB file.
+ *
+ * @property int    $nodeCount                This is an unsigned 32-bit
+ *                                            integer indicating the number of
+ *                                            nodes in the search tree.
+ * @property int    $recordSize               This is an unsigned 16-bit
+ *                                            integer. It indicates the number
+ *                                            of bits in a record in the search
+ *                                            tree. Note that each node
+ *                                            consists of two records.
+ * @property int    $ipVersion                This is an unsigned 16-bit
+ *                                            integer which is always 4 or 6.
+ *                                            It indicates whether the database
+ *                                            contains IPv4 or IPv6 address
+ *                                            data.
+ * @property string $databaseType             This is a string that indicates
+ *                                            the structure of each data record
+ *                                            associated with an IP address.
+ *                                            The actual definition of these
+ *                                            structures is left up to the
+ *                                            database creator.
+ * @property array  $languages                An array of strings, each of
+ *                                            which is a language code. A given
+ *                                            record may contain data items
+ *                                            that have been localized to some
+ *                                            or all of these languages. This
+ *                                            may be undefined.
+ * @property int    $binaryFormatMajorVersion This is an unsigned 16-bit
+ *                                            integer indicating the major
+ *                                            version number for the database's
+ *                                            binary format.
+ * @property int    $binaryFormatMinorVersion This is an unsigned 16-bit
+ *                                            integer indicating the minor
+ *                                            version number for the database's
+ *                                            binary format.
+ * @property int    $buildEpoch               This is an unsigned 64-bit
+ *                                            integer that contains the
+ *                                            database build timestamp as a
+ *                                            Unix epoch value.
+ * @property array  $description              This key will always point to a
+ *                                            map (associative array). The keys
+ *                                            of that map will be language
+ *                                            codes, and the values will be a
+ *                                            description in that language as a
+ *                                            UTF-8 string. May be undefined
+ *                                            for some databases.
+ */
+class Metadata
+{
+    private $binaryFormatMajorVersion;
+    private $binaryFormatMinorVersion;
+    private $buildEpoch;
+    private $databaseType;
+    private $description;
+    private $ipVersion;
+    private $languages;
+    private $nodeByteSize;
+    private $nodeCount;
+    private $recordSize;
+    private $searchTreeSize;
+
+    public function __construct($metadata)
+    {
+        $this->binaryFormatMajorVersion =
+            $metadata['binary_format_major_version'];
+        $this->binaryFormatMinorVersion =
+            $metadata['binary_format_minor_version'];
+        $this->buildEpoch = $metadata['build_epoch'];
+        $this->databaseType = $metadata['database_type'];
+        $this->languages = $metadata['languages'];
+        $this->description = $metadata['description'];
+        $this->ipVersion = $metadata['ip_version'];
+        $this->nodeCount = $metadata['node_count'];
+        $this->recordSize = $metadata['record_size'];
+        $this->nodeByteSize = $this->recordSize / 4;
+        $this->searchTreeSize = $this->nodeCount * $this->nodeByteSize;
+    }
+
+    public function __get($var)
+    {
+        return $this->$var;
+    }
+}

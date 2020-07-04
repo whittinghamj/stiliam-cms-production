@@ -1,96 +1,198 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+<?php
+
+if(isset($_GET['hostname'])) {
+	$hostname = $_GET['hostname'];
+}else{
+	$hostname = 'SlipStream';
+}
+
 ?>
-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
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+	<title>Speedtest</title>
+	<script type="text/javascript" src="speedtest.js"></script>
+	<script type="text/javascript">
+
+		//INITIALIZE SPEEDTEST
+		var s=new Speedtest(); //create speedtest object
+		s.onupdate=function(data){ //callback to update data in UI
+		    I("ip").textContent=data.clientIp;
+		    I("dlText").textContent=(data.testState==1&&data.dlStatus==0)?"...":data.dlStatus;
+		    I("ulText").textContent=(data.testState==3&&data.ulStatus==0)?"...":data.ulStatus;
+		    I("pingText").textContent=data.pingStatus;
+		    I("jitText").textContent=data.jitterStatus;
+		}
+		s.onend=function(aborted){ //callback for test ended/aborted
+		    I("startStopBtn").className=""; //show start button again
+		    if(aborted){ //if the test was aborted, clear the UI and prepare for new test
+				initUI();
+		    }
+		}
+
+		function startStop(){ //start/stop button pressed
+			if(s.getState()==3){
+				//speedtest is running, abort
+				s.abort();
+			}else{
+				//test is not running, begin
+				s.start();
+				I("startStopBtn").className="running";
+			}
+		}
+
+		//function to (re)initialize UI
+		function initUI(){
+			I("dlText").textContent="";
+			I("ulText").textContent="";
+			I("pingText").textContent="";
+			I("jitText").textContent="";
+			I("ip").textContent="";
+		}
+
+		function I(id){return document.getElementById(id);}
+	</script>
+
+	<style type="text/css">
+		html,body{
+			border:none; padding:0; margin:0;
+			background:#FFFFFF;
+			color:#202020;
+		}
+		body{
+			text-align:center;
+			font-family:"Roboto",sans-serif;
+		}
+		h1{
+			color:#404040;
+		}
+		#startStopBtn{
+			display:inline-block;
+			margin:0 auto;
+			color:#6060AA;
+			background-color:rgba(0,0,0,0);
+			border:0.15em solid #6060FF;
+			border-radius:0.3em;
+			transition:all 0.3s;
+			box-sizing:border-box;
+			width:8em; height:3em;
+			line-height:2.7em;
+			cursor:pointer;
+			box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
+		}
+		#startStopBtn:hover{
+			box-shadow: 0 0 2em rgba(0,0,0,0.1), inset 0 0 1em rgba(0,0,0,0.1);
+		}
+		#startStopBtn.running{
+			background-color:#FF3030;
+			border-color:#FF6060;
+			color:#FFFFFF;
+		}
+		#startStopBtn:before{
+			content:"Start";
+		}
+		#startStopBtn.running:before{
+			content:"Abort";
+		}
+		#test{
+			margin-top:2em;
+			margin-bottom:12em;
+		}
+		div.testArea{
+			display:inline-block;
+			width:14em;
+			height:9em;
+			position:relative;
+			box-sizing:border-box;
+		}
+		div.testName{
+			position:absolute;
+			top:0.1em; left:0;
+			width:100%;
+			font-size:1.4em;
+			z-index:9;
+		}
+		div.meterText{
+			position:absolute;
+			bottom:1.5em; left:0;
+			width:100%;
+			font-size:2.5em;
+			z-index:9;
+		}
+		#dlText{
+			color:#6060AA;
+		}
+		#ulText{
+			color:#309030;
+		}
+		#pingText,#jitText{
+			color:#AA6060;
+		}
+		div.meterText:empty:before{
+			color:#505050 !important;
+			content:"0.00";
+		}
+		div.unit{
+			position:absolute;
+			bottom:2em; left:0;
+			width:100%;
+			z-index:9;
+		}
+		div.testGroup{
+			display:inline-block;
+		}
+		@media all and (max-width:65em){
+			body{
+				font-size:1.5vw;
+			}
+		}
+		@media all and (max-width:40em){
+			body{
+				font-size:0.8em;
+			}
+			div.testGroup{
+				display:block;
+				margin: 0 auto;
+			}
+		}
+	</style>
+</head>
+<body>
+<h1>Speedtest</h1>
+<div id="startStopBtn" onclick="startStop()"></div>
+<div id="test">
+	<div class="testGroup">
+		<div class="testArea">
+			<div class="testName">Download</div>
+			<div id="dlText" class="meterText"></div>
+			<div class="unit">Mbps</div>
+		</div>
+		<div class="testArea">
+			<div class="testName">Upload</div>
+			<div id="ulText" class="meterText"></div>
+			<div class="unit">Mbps</div>
+		</div>
+	</div>
+	<div class="testGroup">
+		<div class="testArea">
+			<div class="testName">Ping</div>
+			<div id="pingText" class="meterText"></div>
+			<div class="unit">ms</div>
+		</div>
+		<div class="testArea">
+			<div class="testName">Jitter</div>
+			<div id="jitText" class="meterText"></div>
+			<div class="unit">ms</div>
+		</div>
+	</div>
+	<div id="ipArea">
+		IP Address: <span id="ip"></span>
+	</div>
+</div>
+<script type="text/javascript">
+    initUI();
+</script>
+</body>
+</html>
