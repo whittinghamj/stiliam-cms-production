@@ -2,7 +2,7 @@
 @reboot /usr/local/nginx/sbin/nginx
 
 # Stiliam - Start Stalker Portal
-# @reboot sh /var/www/html/scripts/stalker_start.sh
+@reboot sh /var/www/html/scripts/stalker_start.sh
 
 # Stiliam - GIT Update
 * * * * * sh /var/www/html/update.sh
