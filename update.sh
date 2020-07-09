@@ -11,7 +11,7 @@ cd /var/www/html >> $LOG
 # check folders
 mkdir -p /var/www/html/xc_uploads >> $LOG
 mkdir -p /var/www/html/m3u_uploads >> $LOG
-mkdir -p /opt/stiliam/backups >> $LOG
+mkdir -p /opt/stiliam-backups >> $LOG
 
 # confirm folder permissions
 chmod 777 /var/www/html/content/imdb_media/ >> $LOG
