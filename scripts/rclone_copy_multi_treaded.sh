@@ -1,0 +1,1 @@
+rclone copy "/mnt/nas01/plex/tv/Baywatch/" "/media/tv/Baywatch/" --progress --multi-thread-streams=50
