@@ -5,7 +5,7 @@
 @reboot sh /var/www/html/scripts/stalker_start.sh
 
 # Stiliam - GIT Update
-* * * * * sh /var/www/html/update.sh
+# * * * * * sh /var/www/html/update.sh
 
 # Stiliam - Cron Manager
 * * * * * /usr/bin/php -q /var/www/html/console/console.php --action=cron_manager > /tmp/cron.cron.log
