@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+        <meta name="apple-mobile-web-app-title" content="CodePen" />
+        <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+        <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+        <title>EPG Example</title>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <style>
+            .epg-container {
+                position: relative;
+                width: 1500px;
+                overflow: hidden;
+                display: block;
+                margin: 0 auto;
+                background-color: black;
+            }
+            .epg-container .right-arrow {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+            }
+            .epg-container .glyphicon-chevron-right {
+                height: 100px;
+            }
+            .epg-container .filter-search-bar {
+                height: 60px;
+                color: white;
+                background-color: #181818;
+                font-size: 20px;
+            }
+            .epg-container .filter-search-bar .dropdown-menu {
+                background-color: black;
+                border: 2px solid white;
+                left: 50%;
+                right: auto;
+                text-align: center;
+                transform: translate(-50%, 0);
+            }
+            .epg-container .filter-search-bar .dropdown-menu li a {
+                font-size: 20px;
+                color: white;
+            }
+            .epg-container .filter-search-bar .dropdown-menu li a:hover {
+                color: #fa9609;
+                background-color: black;
+            }
+            .epg-container .filter-search-bar .dropdown-toggle {
+                background-color: black;
+                border: 2px solid white;
+                border-radius: 20px;
+                color: #fa9609;
+            }
+            .epg-container .filter-search-bar .dropdown-toggle:hover {
+                background-color: black;
+            }
+            .epg-container .filter-search-bar .btn-default .caret {
+                border-top: 4px solid;
+            }
+            .epg-container .filter-search-bar .btn-group.open .dropdown-toggle {
+                background-color: black;
+            }
+            .epg-container .filter-search-bar .time-zone {
+                padding-left: 20%;
+            }
+            .epg-container .filter-search-bar .genre-search {
+                position: relative;
+            }
+            .epg-container .filter-search-bar .genre-search input {
+                background-color: black;
+                color: white;
+                width: 90%;
+                border: 2px solid white;
+                border-radius: 20px;
+                position: relative;
+                padding: 0 0 0 12%;
+                height: 36px;
+            }
+            .epg-container .filter-search-bar .genre-search input:focus {
+                outline: none;
+                border-color: #fa9609;
+            }
+            .epg-container .filter-search-bar .genre-search .dropdown-toggle {
+                color: white;
+                background-color: #00aeed;
+            }
+            .epg-container .filter-search-bar .genre-search .btn-group {
+                position: absolute;
+                display: block;
+                top: 0;
+            }
+            .epg-container ul.listings-grid {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                white-space: nowrap;
+                background-color: #262626;
+            }
+            .epg-container ul.listings-grid li {
+                font-size: 25px;
+            }
+            .epg-container ul.listings-grid .listings-timebar {
+                height: 50px;
+                color: white;
+            }
+            .epg-container ul.listings-grid .listings-channel-row {
+                height: auto;
+                padding: 0;
+                border-bottom: solid;
+                border-bottom-width: 6px;
+                border-color: #262626;
+                overflow: hidden;
+            }
+            .epg-container ul.listings-grid .listings-timebar-time {
+                width: 20%;
+                vertical-align: middle;
+                float: left;
+            }
+            .epg-container ul.listings-grid .listings-channel {
+                /*  color not necesary  */
+                color: white;
+                width: 20%;
+                height: 83px;
+                float: left;
+                text-align: center;
+            }
+            .epg-container ul.listings-grid .listings-channel img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+            .epg-container ul.listings-grid .listings-program {
+                color: #989898;
+                border-right: solid;
+                border-right-width: 3px;
+                border-left: solid;
+                border-left-width: 3px;
+                border-color: #262626;
+                float: left;
+                padding: 10px 10px;
+                background-color: black;
+            }
+            .epg-container ul.listings-grid .listings-details {
+                font-size: 20px;
+                float: left;
+            }
+            .epg-container ul.listings-grid .listings-details-first {
+                color: #fa9609;
+            }
+        </style>
+        <script>
+            window.console = window.console || function (t) {};
+        </script>
+        <script>
+            if (document.location.search.match(/type=embed/gi)) {
+                window.parent.postMessage("resize", "*");
+            }
+        </script>
+    </head>
+
+    <body translate="no">
+        <div class="epg-container">
+            <ul class="listings-grid">
+                <li class="col-md-12 listings-channel-row">
+                    <div class="listings-channel">ESPN</div>
+                    <div class="listings-program" style="width: 40%;">
+                        <div class="listings-program-title">ESPN News</div>
+                        <div class="listings-details"><span class="listings-details-first">S2, Ep7</span> | TV-MA | 60 min</div>
+                    </div>
+                    <div class="listings-program" style="width: 40%;">
+                        <div class="listings-program-title">Chargers vs 49ers</div>
+                        <div class="listings-details"><span class="listings-details-first">TV-MA</span> | 2 hrs</div>
+                    </div>
+                </li>
+                <li class="col-md-12 listings-channel-row">
+                    <div class="listings-channel">ESPN</div>
+                    <div class="listings-program" style="width: 40%;">
+                        <div class="listings-program-title">ESPN News</div>
+                        <div class="listings-details"><span class="listings-details-first">S2, Ep7</span> | TV-MA | 60 min</div>
+                    </div>
+                    <div class="listings-program" style="width: 40%;">
+                        <div class="listings-program-title">Chargers vs 49ers</div>
+                        <div class="listings-details"><span class="listings-details-first">TV-MA</span> | 2 hrs</div>
+                    </div>
+                </li>
+                <li class="col-md-12 listings-channel-row">
+                    <div class="listings-channel">ESPN</div>
+                    <div class="listings-program" style="width: 40%;">
+                        <div class="listings-program-title">ESPN News</div>
+                        <div class="listings-details"><span class="listings-details-first">S2, Ep7</span> | TV-MA | 60 min</div>
+                    </div>
+                    <div class="listings-program" style="width: 40%;">
+                        <div class="listings-program-title">Red Sox vs Yankees</div>
+                        <div class="listings-details"><span class="listings-details-first">TV-MA</span> | 3 hrs</div>
+                    </div>
+                </li>
+                <li class="col-md-12 listings-channel-row">
+                    <div class="listings-channel">ESPN</div>
+                    <div class="listings-program" style="width: 40%;">
+                        <div class="listings-program-title">ESPN News</div>
+                        <div class="listings-details"><span class="listings-details-first">S2, Ep7</span> | TV-MA | 60 min</div>
+                    </div>
+                    <div class="listings-program" style="width: 40%;">
+                        <div class="listings-program-title">Chargers vs 49ers</div>
+                        <div class="listings-details"><span class="listings-details-first">TV-MA</span> | 2 hrs</div>
+                    </div>
+                </li>
+                <li class="col-md-12 listings-channel-row">
+                    <div class="listings-channel">ESPN</div>
+                    <div class="listings-program" style="width: 40%;">
+                        <div class="listings-program-title">ESPN News</div>
+                        <div class="listings-details"><span class="listings-details-first">S2, Ep7</span> | TV-MA | 60 min</div>
+                    </div>
+                    <div class="listings-program" style="width: 40%;">
+                        <div class="listings-program-title">Chargers vs 49ers</div>
+                        <div class="listings-details"><span class="listings-details-first">TV-MA</span> | 2 hrs</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>

@@ -18,6 +18,9 @@ chmod 777 /var/www/html/content/imdb_media/ >> $LOG
 chmod 777 /var/www/html/m3u_uploads/ >> $LOG
 chmod 777 /var/www/html/xc_uploads >> $LOG
 
+# database mods
+# mysql -ustiliam -pstiliam1984 -e "ALTER TABLE cms.servers ADD COLUMN IF NOT EXISTS \`type\` VARCHAR(20); "; >> $LOG
+
 
 # mysql status check
 UP=$(pgrep mysql | wc -l);

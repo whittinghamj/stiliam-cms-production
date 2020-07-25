@@ -1,1 +1,1 @@
-rclone copy "/mnt/nas01/plex/tv/Baywatch/" "/media/tv/Baywatch/" --progress --multi-thread-streams=50
+rclone copy "/mnt/google_james_k19_org/Media/TV/TV/Grey's Anatomy/" "/media/tv/Grey's Anatomy" --progress --fast-list --drive-chunk-size=128M --multi-thread-cutoff=1 --multi-thread-streams=4
