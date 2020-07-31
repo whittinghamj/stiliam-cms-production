@@ -20,7 +20,8 @@ chmod 777 /var/www/html/xc_uploads >> $LOG
 
 # database mods
 # mysql -ustiliam -pstiliam1984 -e "ALTER TABLE cms.servers ADD COLUMN IF NOT EXISTS \`type\` VARCHAR(20); "; >> $LOG
-
+mysql -ustiliam -pstiliam1984 -e "ALTER TABLE cms.channels ADD COLUMN IF NOT EXISTS \`probesize\` VARCHAR(20) DEFAULT '5000000'; "; >> $LOG
+mysql -ustiliam -pstiliam1984 -e "ALTER TABLE cms.channels ADD COLUMN IF NOT EXISTS \`analyzeduration\` VARCHAR(20) DEFAULT '5000000'; "; >> $LOG
 
 # mysql status check
 UP=$(pgrep mysql | wc -l);
